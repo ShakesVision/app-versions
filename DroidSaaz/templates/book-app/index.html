@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Book App</title>
+    <link rel="stylesheet" href="styles/book.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;700&family=Lora:wght@400;700&family=Merriweather:wght@400;700&family=Noto+Nastaliq+Urdu:wght@400;700&family=Open+Sans:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loading" class="loading-screen">
+        <div class="spinner"></div>
+        <p>Loading...</p>
+    </div>
+
+    <!-- Main Container -->
+    <div id="app" class="hidden">
+        <!-- Header -->
+        <header id="header">
+            <button id="menuBtn" class="icon-btn" aria-label="Menu">☰</button>
+            <h1 id="headerTitle">Book</h1>
+            <button id="settingsBtn" class="icon-btn" aria-label="Settings">⚙</button>
+        </header>
+
+        <!-- Sidebar (Table of Contents) -->
+        <nav id="sidebar" class="sidebar hidden">
+            <div class="sidebar-header">
+                <h2>Contents</h2>
+                <button id="closeSidebar" class="icon-btn">×</button>
+            </div>
+            <ul id="tocList" class="toc-list"></ul>
+        </nav>
+
+        <!-- Overlay -->
+        <div id="overlay" class="overlay hidden"></div>
+
+        <!-- Content Area -->
+        <main id="content">
+            <!-- Cover Page -->
+            <section id="coverPage" class="page cover-page">
+                <div class="cover-content">
+                    <img id="coverImage" src="" alt="Cover" class="hidden">
+                    <h1 id="bookTitle">Book Title</h1>
+                    <p id="bookAuthor" class="author">by Author Name</p>
+                    <p id="dedication" class="dedication hidden"></p>
+                </div>
+                <button id="startReading" class="btn-primary">Start Reading</button>
+            </section>
+
+            <!-- Chapter Pages (dynamically added) -->
+            <div id="chapters"></div>
+        </main>
+
+        <!-- Navigation -->
+        <footer id="navigation">
+            <button id="prevBtn" class="nav-btn" disabled>← Previous</button>
+            <span id="pageIndicator">1 / 1</span>
+            <button id="nextBtn" class="nav-btn">Next →</button>
+        </footer>
+
+        <!-- Settings Panel -->
+        <div id="settingsPanel" class="settings-panel hidden">
+            <div class="settings-header">
+                <h2>Settings</h2>
+                <button id="closeSettings" class="icon-btn">×</button>
+            </div>
+            <div class="setting-group">
+                <label>Font Size</label>
+                <div class="font-size-controls">
+                    <button id="fontSmaller">A-</button>
+                    <span id="fontSizeDisplay">16px</span>
+                    <button id="fontLarger">A+</button>
+                </div>
+            </div>
+            <div class="setting-group">
+                <label>Theme</label>
+                <div class="theme-options">
+                    <button id="themeLight" class="theme-btn active" data-theme="light">Light</button>
+                    <button id="themeDark" class="theme-btn" data-theme="dark">Dark</button>
+                    <button id="themeSepia" class="theme-btn" data-theme="sepia">Sepia</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="scripts/app.js"></script>
+</body>
+</html>
+

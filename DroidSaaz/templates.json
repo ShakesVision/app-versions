@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "baseUrl": "https://raw.githubusercontent.com/ShakesVision/app-versions/main/DroidSaaz",
+  "templates": [
+    {
+      "id": "book-app-v1",
+      "name": "Book App",
+      "description": "Create a beautiful reading app with chapters, table of contents, and customizable themes",
+      "icon": "templates/book-app/icon.png",
+      "preview": "templates/book-app/preview.png",
+      "templatePath": "templates/book-app/book-template",
+      "templateVersion": 1,
+      "category": "reading",
+      "features": ["chapters", "toc", "dark-mode", "rtl-support", "custom-fonts"],
+      "files": [
+        "template.json",
+        "index.html",
+        "styles/utils.css",
+        "styles/book.css",
+        "scripts/app.js"
+      ]
+    }
+  ]
+}
+

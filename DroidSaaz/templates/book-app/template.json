@@ -1,0 +1,78 @@
+{
+  "id": "book-app-v1",
+  "name": "Book App",
+  "version": 1,
+  
+  "fields": [
+    {
+      "id": "title",
+      "type": "text",
+      "required": true,
+      "labels": {"en": "Book Title", "ar": "عنوان الكتاب", "ur": "کتاب کا عنوان"},
+      "placeholder": {"en": "Enter book title", "ar": "أدخل عنوان الكتاب", "ur": "کتاب کا عنوان درج کریں"},
+      "maxLength": 100
+    },
+    {
+      "id": "author",
+      "type": "text",
+      "required": true,
+      "labels": {"en": "Author Name", "ar": "اسم المؤلف", "ur": "مصنف کا نام"},
+      "placeholder": {"en": "Enter author name", "ar": "أدخل اسم المؤلف", "ur": "مصنف کا نام درج کریں"}
+    },
+    {
+      "id": "cover",
+      "type": "image",
+      "required": false,
+      "labels": {"en": "Cover Image", "ar": "صورة الغلاف", "ur": "سرورق کی تصویر"},
+      "aspectRatio": "2:3"
+    },
+    {
+      "id": "dedication",
+      "type": "textarea",
+      "required": false,
+      "labels": {"en": "Dedication", "ar": "إهداء", "ur": "انتساب"},
+      "placeholder": {"en": "Optional dedication text", "ar": "نص الإهداء (اختياري)", "ur": "انتساب کا متن (اختیاری)"},
+      "maxLength": 500
+    }
+  ],
+  
+  "chapters": {
+    "enabled": true,
+    "minCount": 1,
+    "maxCount": 100,
+    "labels": {"en": "Chapter", "ar": "فصل", "ur": "باب"},
+    "fields": [
+      {"id": "title", "type": "text", "required": true, "labels": {"en": "Chapter Title", "ar": "عنوان الفصل", "ur": "باب کا عنوان"}},
+      {"id": "content", "type": "markdown", "required": true, "labels": {"en": "Content", "ar": "المحتوى", "ur": "مواد"}},
+      {"id": "direction", "type": "direction", "required": false, "default": "inherit", "labels": {"en": "Text Direction", "ar": "اتجاه النص", "ur": "متن کی سمت"}}
+    ]
+  },
+  
+  "customization": {
+    "colors": [
+      {"id": "primary", "labels": {"en": "Primary Color", "ar": "اللون الأساسي", "ur": "بنیادی رنگ"}, "default": "#2196F3"},
+      {"id": "background", "labels": {"en": "Background", "ar": "الخلفية", "ur": "پس منظر"}, "default": "#FAFAFA"},
+      {"id": "text", "labels": {"en": "Text Color", "ar": "لون النص", "ur": "متن کا رنگ"}, "default": "#212121"},
+      {"id": "accent", "labels": {"en": "Accent Color", "ar": "لون التمييز", "ur": "نمایاں رنگ"}, "default": "#FF5722"}
+    ],
+    "fonts": {
+      "heading": {
+        "labels": {"en": "Heading Font", "ar": "خط العنوان", "ur": "سرخی کا فونٹ"},
+        "options": ["Roboto", "Open Sans", "Lora", "Amiri", "Noto Nastaliq Urdu", "Cairo"],
+        "default": "Roboto"
+      },
+      "body": {
+        "labels": {"en": "Body Font", "ar": "خط النص", "ur": "متن کا فونٹ"},
+        "options": ["Roboto", "Open Sans", "Merriweather", "Amiri", "Noto Nastaliq Urdu", "Cairo"],
+        "default": "Merriweather"
+      }
+    },
+    "direction": {
+      "labels": {"en": "Text Direction", "ar": "اتجاه النص", "ur": "متن کی سمت"},
+      "options": ["ltr", "rtl", "auto"],
+      "default": "auto",
+      "perChapter": true
+    }
+  }
+}
+

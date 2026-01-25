@@ -1,0 +1,14 @@
+{
+  "apps": [
+    {
+      "package": "com.sarbakaf.droidsaaz",
+      "banner_id": "ca-app-pub-9293070686220717/9715660067",
+      "interstitial_id": "ca-app-pub-9293070686220717/3246949472",
+      "rewarded_id": "ca-app-pub-9293070686220717/8402578393",
+      "native_id": "ca-app-pub-9293070686220717/1933867800",
+      "owner_ad_id": "ca-app-pub-9293070686220717/9715660067",
+      "owner_share_percent": 30
+    }
+  ]
+}
+
