@@ -1,0 +1,30 @@
+{
+  "title": "My Document",
+  "author": "Author Name",
+  "description": "A brief description of this document.",
+  "cover": "images/cover.jpg",
+  "direction": "ltr",
+  "settings": {
+    "showPageNumbers": true,
+    "showThumbnails": true,
+    "enableZoom": true,
+    "rememberPage": true
+  },
+  "pages": [
+    {
+      "image": "images/page-001.jpg",
+      "label": "Introduction"
+    },
+    {
+      "image": "images/page-002.jpg",
+      "label": "Chapter 1"
+    },
+    {
+      "image": "images/page-003.jpg"
+    },
+    {
+      "image": "images/page-004.jpg"
+    }
+  ]
+}
+
