@@ -1,0 +1,233 @@
+{
+  "id": "restaurant-v1",
+  "name": "Restaurant & Shop",
+  "version": 2,
+  "labels": {
+    "en": "Restaurant & Shop",
+    "ar": "مطعم ومتجر"
+  },
+  "description": {
+    "en": "Create a digital menu or catalog app for your restaurant, cafe, shop, or store. No ordering or payments - just a beautiful showcase.",
+    "ar": "أنشئ تطبيق قائمة رقمية أو كتالوج لمطعمك أو مقهاك أو متجرك. عرض جميل بدون طلبات أو مدفوعات."
+  },
+  "sections": [
+    {
+      "id": "business",
+      "type": "form",
+      "labels": {"en": "Business Info", "ar": "معلومات العمل"},
+      "icon": "store",
+      "fields": [
+        {
+          "id": "name",
+          "type": "text",
+          "labels": {"en": "Business Name", "ar": "اسم العمل"},
+          "required": true,
+          "placeholder": {"en": "My Restaurant", "ar": "مطعمي"}
+        },
+        {
+          "id": "tagline",
+          "type": "text",
+          "labels": {"en": "Tagline/Slogan", "ar": "الشعار"},
+          "placeholder": {"en": "Authentic flavors since 1995", "ar": "نكهات أصيلة منذ 1995"}
+        },
+        {
+          "id": "logo",
+          "type": "image",
+          "labels": {"en": "Logo", "ar": "الشعار"},
+          "hint": {"en": "Square image recommended", "ar": "صورة مربعة مفضلة"}
+        },
+        {
+          "id": "cover",
+          "type": "image",
+          "labels": {"en": "Cover Photo", "ar": "صورة الغلاف"},
+          "hint": {"en": "Wide banner image", "ar": "صورة عريضة للبانر"}
+        },
+        {
+          "id": "description",
+          "type": "markdown",
+          "labels": {"en": "About Us", "ar": "من نحن"},
+          "hint": {"en": "Tell your story", "ar": "أخبرنا قصتك"}
+        },
+        {
+          "id": "phone",
+          "type": "text",
+          "labels": {"en": "Phone Number", "ar": "رقم الهاتف"},
+          "inputType": "tel",
+          "placeholder": {"en": "+1 234 567 8900", "ar": "+966 12 345 6789"}
+        },
+        {
+          "id": "whatsapp",
+          "type": "text",
+          "labels": {"en": "WhatsApp", "ar": "واتساب"},
+          "inputType": "tel",
+          "placeholder": {"en": "+1 234 567 8900", "ar": "+966 12 345 6789"}
+        },
+        {
+          "id": "email",
+          "type": "text",
+          "labels": {"en": "Email", "ar": "البريد الإلكتروني"},
+          "inputType": "email"
+        },
+        {
+          "id": "address",
+          "type": "textarea",
+          "labels": {"en": "Address", "ar": "العنوان"},
+          "placeholder": {"en": "123 Main St, City, Country", "ar": "123 شارع الرئيسي، المدينة"}
+        },
+        {
+          "id": "mapUrl",
+          "type": "text",
+          "labels": {"en": "Google Maps Link", "ar": "رابط خرائط جوجل"},
+          "placeholder": {"en": "https://maps.google.com/...", "ar": "https://maps.google.com/..."},
+          "hint": {"en": "Share link from Google Maps", "ar": "رابط المشاركة من خرائط جوجل"}
+        },
+        {
+          "id": "hours",
+          "type": "textarea",
+          "labels": {"en": "Operating Hours", "ar": "ساعات العمل"},
+          "placeholder": {"en": "Mon-Fri: 9AM-10PM\nSat-Sun: 10AM-11PM", "ar": "الأحد-الخميس: 9ص-10م\nالجمعة-السبت: 10ص-11م"}
+        }
+      ]
+    },
+    {
+      "id": "menu",
+      "type": "list",
+      "labels": {"en": "Menu Items", "ar": "قائمة الطعام"},
+      "icon": "restaurant_menu",
+      "minCount": 1,
+      "maxCount": 200,
+      "itemLabels": {"en": "Item", "ar": "عنصر"},
+      "fields": [
+        {
+          "id": "name",
+          "type": "text",
+          "labels": {"en": "Item Name", "ar": "اسم العنصر"},
+          "required": true
+        },
+        {
+          "id": "category",
+          "type": "text",
+          "labels": {"en": "Category", "ar": "الفئة"},
+          "placeholder": {"en": "Appetizers, Main Course, Desserts...", "ar": "مقبلات، أطباق رئيسية، حلويات..."}
+        },
+        {
+          "id": "description",
+          "type": "textarea",
+          "labels": {"en": "Description", "ar": "الوصف"}
+        },
+        {
+          "id": "price",
+          "type": "text",
+          "labels": {"en": "Price", "ar": "السعر"},
+          "placeholder": {"en": "$9.99", "ar": "99 ريال"}
+        },
+        {
+          "id": "image",
+          "type": "image",
+          "labels": {"en": "Photo", "ar": "صورة"}
+        },
+        {
+          "id": "tags",
+          "type": "text",
+          "labels": {"en": "Tags", "ar": "الوسوم"},
+          "placeholder": {"en": "vegetarian, spicy, popular", "ar": "نباتي، حار، شائع"}
+        }
+      ]
+    },
+    {
+      "id": "gallery",
+      "type": "form",
+      "labels": {"en": "Gallery & Social", "ar": "المعرض والتواصل"},
+      "icon": "photo_library",
+      "fields": [
+        {
+          "id": "gallery",
+          "type": "images",
+          "labels": {"en": "Photo Gallery", "ar": "معرض الصور"},
+          "hint": {"en": "Add photos of your restaurant, food, ambiance", "ar": "أضف صور مطعمك، طعامك، الأجواء"}
+        },
+        {
+          "id": "instagram",
+          "type": "text",
+          "labels": {"en": "Instagram", "ar": "انستغرام"},
+          "placeholder": {"en": "@myrestaurant", "ar": "@مطعمي"}
+        },
+        {
+          "id": "facebook",
+          "type": "text",
+          "labels": {"en": "Facebook", "ar": "فيسبوك"},
+          "placeholder": {"en": "https://facebook.com/myrestaurant", "ar": "https://facebook.com/myrestaurant"}
+        },
+        {
+          "id": "twitter",
+          "type": "text",
+          "labels": {"en": "Twitter/X", "ar": "تويتر"},
+          "placeholder": {"en": "@myrestaurant", "ar": "@مطعمي"}
+        },
+        {
+          "id": "tiktok",
+          "type": "text",
+          "labels": {"en": "TikTok", "ar": "تيك توك"},
+          "placeholder": {"en": "@myrestaurant", "ar": "@مطعمي"}
+        },
+        {
+          "id": "youtube",
+          "type": "text",
+          "labels": {"en": "YouTube", "ar": "يوتيوب"},
+          "placeholder": {"en": "https://youtube.com/@mychannel", "ar": "https://youtube.com/@قناتي"}
+        },
+        {
+          "id": "website",
+          "type": "text",
+          "labels": {"en": "Website", "ar": "الموقع الإلكتروني"},
+          "placeholder": {"en": "https://myrestaurant.com", "ar": "https://مطعمي.com"}
+        }
+      ]
+    },
+    {
+      "id": "customize",
+      "type": "customize",
+      "labels": {"en": "Style", "ar": "التخصيص"},
+      "icon": "palette",
+      "colors": [
+        {
+          "id": "primary",
+          "labels": {"en": "Primary Color", "ar": "اللون الأساسي"},
+          "default": "#D32F2F"
+        },
+        {
+          "id": "secondary",
+          "labels": {"en": "Secondary Color", "ar": "اللون الثانوي"},
+          "default": "#FF5722"
+        },
+        {
+          "id": "background",
+          "labels": {"en": "Background", "ar": "الخلفية"},
+          "default": "#FAFAFA"
+        },
+        {
+          "id": "text",
+          "labels": {"en": "Text Color", "ar": "لون النص"},
+          "default": "#212121"
+        }
+      ],
+      "fonts": {
+        "heading": {
+          "labels": {"en": "Heading Font", "ar": "خط العناوين"},
+          "options": ["Playfair Display", "Montserrat", "Lobster", "Poppins", "Dancing Script"],
+          "default": "Playfair Display"
+        },
+        "body": {
+          "labels": {"en": "Body Font", "ar": "خط النص"},
+          "options": ["Open Sans", "Roboto", "Lato", "Source Sans Pro", "Noto Sans Arabic"],
+          "default": "Open Sans"
+        }
+      },
+      "direction": {
+        "labels": {"en": "Text Direction", "ar": "اتجاه النص"},
+        "default": "auto"
+      }
+    }
+  ]
+}
+

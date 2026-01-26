@@ -1,6 +1,9 @@
 {
   "version": 2,
   "baseUrl": "https://raw.githubusercontent.com/ShakesVision/app-versions/main/DroidSaaz",
+  "sharedFiles": [
+    "shared/utils.css"
+  ],
   "templates": [
     {
       "id": "book-app-v1",
@@ -12,44 +15,97 @@
       "files": [
         "template.json",
         "index.html",
-        "styles/utils.css",
         "styles/book.css",
         "scripts/app.js"
       ],
       "templateVersion": 1,
       "category": "reading",
-      "features": [
-        "chapters",
-        "toc",
-        "dark-mode",
-        "rtl-support",
-        "custom-fonts"
-      ]
+      "features": ["chapters", "toc", "dark-mode", "rtl-support", "custom-fonts"]
     },
     {
       "id": "pdf-viewer-v1",
       "name": "PDF / Image Book",
-      "description": "Create a PDF-style viewer app from images. Perfect for ebooks, magazines, comics, and manuals",
+      "description": "Create a flipbook from images. Perfect for ebooks, magazines, comics, and manuals. Upload multiple images to create pages.",
       "icon": "templates/pdf-viewer/icon.png",
       "preview": "templates/pdf-viewer/preview.png",
       "templatePath": "templates/pdf-viewer",
       "files": [
         "template.json",
         "index.html",
-        "styles/utils.css",
         "styles/pdf.css",
         "scripts/app.js"
       ],
       "templateVersion": 1,
       "category": "reading",
-      "features": [
-        "zoom",
-        "thumbnails",
-        "bookmarks",
-        "dark-mode",
-        "rtl-support",
-        "fullscreen"
-      ]
+      "features": ["multi-image", "thumbnails", "page-nav", "dark-mode", "rtl-support", "fullscreen"]
+    },
+    {
+      "id": "portfolio-v1",
+      "name": "Personal Portfolio",
+      "description": "Showcase your work, skills, and projects with a modern dark-themed portfolio. Perfect for developers, designers, and freelancers.",
+      "icon": "templates/portfolio/icon.png",
+      "preview": "templates/portfolio/preview.png",
+      "templatePath": "templates/portfolio",
+      "files": [
+        "template.json",
+        "index.html",
+        "styles/portfolio.css",
+        "scripts/app.js"
+      ],
+      "templateVersion": 1,
+      "category": "business",
+      "features": ["projects", "social-links", "skills", "animations", "responsive", "dark-theme"]
+    },
+    {
+      "id": "restaurant-v1",
+      "name": "Restaurant & Shop",
+      "description": "Create a digital menu or catalog for your restaurant, cafe, or shop. Showcase products, location, and contact info. No ordering or payments.",
+      "icon": "templates/restaurant/icon.png",
+      "preview": "templates/restaurant/preview.png",
+      "templatePath": "templates/restaurant",
+      "files": [
+        "template.json",
+        "index.html",
+        "styles/restaurant.css",
+        "scripts/app.js"
+      ],
+      "templateVersion": 1,
+      "category": "business",
+      "features": ["menu-catalog", "categories", "gallery", "call-button", "whatsapp", "map", "social-links", "rtl-support"]
+    },
+    {
+      "id": "habit-tracker-v1",
+      "name": "Habit Tracker",
+      "description": "Track daily habits, goals, and routines. Perfect for students, professionals, or anyone building better habits. All data stays on device with optional backup.",
+      "icon": "templates/habit-tracker/icon.png",
+      "preview": "templates/habit-tracker/preview.png",
+      "templatePath": "templates/habit-tracker",
+      "files": [
+        "template.json",
+        "index.html",
+        "styles/habit.css",
+        "scripts/app.js"
+      ],
+      "templateVersion": 1,
+      "category": "productivity",
+      "features": ["local-storage", "streaks", "charts", "categories", "export-import", "dark-theme", "rtl-support"]
+    },
+    {
+      "id": "tutorial-v1",
+      "name": "Tutorial & Course",
+      "description": "Create educational content with lessons, quizzes, and completion certificates. Perfect for courses, training, and tutorials.",
+      "icon": "templates/tutorial/icon.png",
+      "preview": "templates/tutorial/preview.png",
+      "templatePath": "templates/tutorial",
+      "files": [
+        "template.json",
+        "index.html",
+        "styles/tutorial.css",
+        "scripts/app.js"
+      ],
+      "templateVersion": 1,
+      "category": "education",
+      "features": ["lessons", "video-embed", "quizzes", "certificates", "progress-tracking", "rtl-support"]
     }
   ]
 }

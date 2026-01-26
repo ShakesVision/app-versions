@@ -1,0 +1,262 @@
+{
+  "id": "portfolio-v1",
+  "name": "Personal Portfolio",
+  "version": 2,
+  "labels": {
+    "en": "Personal Portfolio",
+    "ar": "البورتفوليو الشخصي"
+  },
+  "description": {
+    "en": "For influencers, coaches, YouTubers, and freelancers. Bio + links, content feeds, email capture. Own your app, stop renting Instagram.",
+    "ar": "للمؤثرين والمدربين واليوتيوبرز والمستقلين. سيرة ذاتية + روابط، محتوى، التقاط الإيميل. امتلك تطبيقك الخاص."
+  },
+  
+  "sections": [
+    {
+      "id": "profile",
+      "type": "form",
+      "labels": {"en": "Profile", "ar": "الملف الشخصي", "ur": "پروفائل"},
+      "icon": "person",
+      "fields": [
+        {
+          "id": "name",
+          "type": "text",
+          "required": true,
+          "labels": {"en": "Your Name", "ar": "اسمك", "ur": "آپ کا نام"},
+          "placeholder": {"en": "John Doe", "ar": "أحمد محمد", "ur": "احمد علی"},
+          "maxLength": 50
+        },
+        {
+          "id": "title",
+          "type": "text",
+          "required": true,
+          "labels": {"en": "Professional Title", "ar": "المسمى الوظيفي", "ur": "پیشہ ورانہ عنوان"},
+          "placeholder": {"en": "Content Creator | Coach | Freelancer", "ar": "صانع محتوى | مدرب | مستقل", "ur": "کنٹینٹ کریٹر | کوچ"},
+          "maxLength": 100
+        },
+        {
+          "id": "photo",
+          "type": "imageUrl",
+          "required": false,
+          "labels": {"en": "Profile Photo", "ar": "صورة الملف الشخصي", "ur": "پروفائل تصویر"},
+          "aspectRatio": "1:1"
+        },
+        {
+          "id": "bio",
+          "type": "textarea",
+          "required": true,
+          "labels": {"en": "About Me", "ar": "نبذة عني", "ur": "میرے بارے میں"},
+          "placeholder": {"en": "Write a short bio about yourself...", "ar": "اكتب نبذة قصيرة عنك...", "ur": "اپنے بارے میں مختصر لکھیں..."},
+          "maxLength": 500
+        },
+        {
+          "id": "skills",
+          "type": "textarea",
+          "required": false,
+          "labels": {"en": "Skills/Tags (comma separated)", "ar": "المهارات/الوسوم (مفصولة بفواصل)", "ur": "مہارتیں (کوما سے الگ)"},
+          "placeholder": {"en": "Content Creator, Coach, Speaker, Author", "ar": "صانع محتوى، مدرب، متحدث، مؤلف", "ur": "کنٹینٹ کریٹر، کوچ، سپیکر"},
+          "maxLength": 300
+        },
+        {
+          "id": "coverImage",
+          "type": "imageUrl",
+          "required": false,
+          "labels": {"en": "Cover/Banner Image", "ar": "صورة الغلاف", "ur": "کور تصویر"},
+          "hint": {"en": "Wide banner image (16:9)", "ar": "صورة عريضة (16:9)", "ur": "چوڑی تصویر (16:9)"}
+        }
+      ]
+    },
+    {
+      "id": "contact",
+      "type": "form",
+      "labels": {"en": "Contact", "ar": "التواصل", "ur": "رابطہ"},
+      "icon": "contact",
+      "fields": [
+        {
+          "id": "email",
+          "type": "text",
+          "required": false,
+          "labels": {"en": "Email", "ar": "البريد الإلكتروني", "ur": "ای میل"},
+          "placeholder": {"en": "contact@example.com", "ar": "contact@example.com", "ur": "contact@example.com"}
+        },
+        {
+          "id": "phone",
+          "type": "text",
+          "required": false,
+          "labels": {"en": "Phone", "ar": "الهاتف", "ur": "فون نمبر"},
+          "placeholder": {"en": "+1 234 567 8900", "ar": "+966 50 123 4567", "ur": "+92 300 1234567"}
+        },
+        {
+          "id": "location",
+          "type": "text",
+          "required": false,
+          "labels": {"en": "Location", "ar": "الموقع", "ur": "مقام"},
+          "placeholder": {"en": "City, Country", "ar": "المدينة، البلد", "ur": "شہر، ملک"}
+        },
+        {
+          "id": "linkedin",
+          "type": "text",
+          "required": false,
+          "labels": {"en": "LinkedIn URL", "ar": "رابط LinkedIn", "ur": "LinkedIn لنک"},
+          "placeholder": {"en": "https://linkedin.com/in/username", "ar": "https://linkedin.com/in/username", "ur": "https://linkedin.com/in/username"}
+        },
+        {
+          "id": "github",
+          "type": "text",
+          "required": false,
+          "labels": {"en": "GitHub URL", "ar": "رابط GitHub", "ur": "GitHub لنک"},
+          "placeholder": {"en": "https://github.com/username", "ar": "https://github.com/username", "ur": "https://github.com/username"}
+        },
+        {
+          "id": "twitter",
+          "type": "text",
+          "required": false,
+          "labels": {"en": "Twitter/X URL", "ar": "رابط Twitter/X", "ur": "Twitter/X لنک"},
+          "placeholder": {"en": "https://twitter.com/username", "ar": "https://twitter.com/username", "ur": "https://twitter.com/username"}
+        },
+        {
+          "id": "website",
+          "type": "text",
+          "required": false,
+          "labels": {"en": "Personal Website", "ar": "الموقع الشخصي", "ur": "ذاتی ویب سائٹ"},
+          "placeholder": {"en": "https://yourwebsite.com", "ar": "https://yourwebsite.com", "ur": "https://yourwebsite.com"}
+        }
+      ]
+    },
+    {
+      "id": "links",
+      "type": "list",
+      "labels": {"en": "Links", "ar": "الروابط", "ur": "لنکس"},
+      "icon": "link",
+      "minCount": 0,
+      "maxCount": 20,
+      "itemLabels": {"en": "Link", "ar": "رابط", "ur": "لنک"},
+      "fields": [
+        {"id": "title", "type": "text", "required": true, "labels": {"en": "Link Title", "ar": "عنوان الرابط", "ur": "لنک کا عنوان"}, "placeholder": {"en": "My Latest Course", "ar": "دورتي الجديدة", "ur": "میرا نیا کورس"}},
+        {"id": "url", "type": "text", "required": true, "labels": {"en": "URL", "ar": "الرابط", "ur": "URL"}},
+        {"id": "icon", "type": "text", "required": false, "labels": {"en": "Emoji Icon", "ar": "أيقونة", "ur": "آئیکن"}, "placeholder": {"en": "📚", "ar": "📚", "ur": "📚"}},
+        {"id": "featured", "type": "checkbox", "required": false, "labels": {"en": "Featured (highlight)", "ar": "مميز", "ur": "نمایاں"}}
+      ]
+    },
+    {
+      "id": "feed",
+      "type": "form",
+      "labels": {"en": "Content Feed", "ar": "المحتوى", "ur": "کنٹینٹ فیڈ"},
+      "icon": "rss_feed",
+      "fields": [
+        {
+          "id": "feedType",
+          "type": "select",
+          "labels": {"en": "Feed Source", "ar": "مصدر المحتوى", "ur": "فیڈ سورس"},
+          "options": [
+            {"value": "none", "label": {"en": "Disabled", "ar": "معطل", "ur": "غیر فعال"}},
+            {"value": "youtube", "label": {"en": "YouTube Channel", "ar": "قناة يوتيوب", "ur": "یوٹیوب چینل"}},
+            {"value": "rss", "label": {"en": "RSS/JSON Feed", "ar": "RSS/JSON فيد", "ur": "RSS/JSON فیڈ"}},
+            {"value": "manual", "label": {"en": "Manual Entries", "ar": "إدخالات يدوية", "ur": "دستی اندراج"}}
+          ],
+          "default": "none"
+        },
+        {
+          "id": "youtubeChannel",
+          "type": "text",
+          "labels": {"en": "YouTube Channel ID", "ar": "معرف قناة يوتيوب", "ur": "یوٹیوب چینل ID"},
+          "placeholder": {"en": "UCxxxxxxx", "ar": "UCxxxxxxx", "ur": "UCxxxxxxx"},
+          "hint": {"en": "Find at youtube.com/account_advanced", "ar": "يمكنك إيجاده في youtube.com/account_advanced", "ur": "youtube.com/account_advanced پر ملے گا"}
+        },
+        {
+          "id": "rssFeedUrl",
+          "type": "text",
+          "labels": {"en": "RSS/JSON Feed URL", "ar": "رابط RSS/JSON", "ur": "RSS/JSON فیڈ URL"},
+          "placeholder": {"en": "https://example.com/feed.json", "ar": "https://example.com/feed.json", "ur": "https://example.com/feed.json"}
+        },
+        {
+          "id": "instagramEmbed",
+          "type": "text",
+          "labels": {"en": "Instagram Profile URL (for embed)", "ar": "رابط حساب انستغرام", "ur": "انسٹاگرام پروفائل URL"},
+          "placeholder": {"en": "https://instagram.com/username", "ar": "https://instagram.com/username", "ur": "https://instagram.com/username"}
+        }
+      ]
+    },
+    {
+      "id": "emailCapture",
+      "type": "form",
+      "labels": {"en": "Email Capture", "ar": "التقاط الإيميل", "ur": "ای میل کیپچر"},
+      "icon": "mail",
+      "fields": [
+        {
+          "id": "enableEmailCapture",
+          "type": "checkbox",
+          "labels": {"en": "Enable Email Signup Form", "ar": "تفعيل نموذج الاشتراك", "ur": "ای میل سائن اپ فعال کریں"},
+          "default": false
+        },
+        {
+          "id": "emailCta",
+          "type": "text",
+          "labels": {"en": "Call-to-Action Text", "ar": "نص الدعوة للعمل", "ur": "کال ٹو ایکشن"},
+          "placeholder": {"en": "Join my newsletter!", "ar": "اشترك في نشرتي البريدية!", "ur": "میری نیوز لیٹر میں شامل ہوں!"},
+          "default": "Join my newsletter!"
+        },
+        {
+          "id": "emailWebhook",
+          "type": "text",
+          "labels": {"en": "Webhook URL (for email collection)", "ar": "رابط Webhook", "ur": "Webhook URL"},
+          "placeholder": {"en": "https://your-webhook.com/subscribe", "ar": "https://your-webhook.com/subscribe", "ur": "https://your-webhook.com/subscribe"},
+          "hint": {"en": "Use services like Zapier, Make, or n8n to collect emails", "ar": "استخدم خدمات مثل Zapier أو Make أو n8n", "ur": "Zapier، Make، یا n8n استعمال کریں"}
+        },
+        {
+          "id": "emailSuccessMessage",
+          "type": "text",
+          "labels": {"en": "Success Message", "ar": "رسالة النجاح", "ur": "کامیابی کا پیغام"},
+          "placeholder": {"en": "Thanks for subscribing!", "ar": "شكراً لاشتراكك!", "ur": "سبسکرائب کرنے کا شکریہ!"},
+          "default": "Thanks for subscribing!"
+        }
+      ]
+    },
+    {
+      "id": "projects",
+      "type": "list",
+      "labels": {"en": "Projects/Work", "ar": "المشاريع/الأعمال", "ur": "پروجیکٹس"},
+      "icon": "work",
+      "minCount": 0,
+      "maxCount": 10,
+      "itemLabels": {"en": "Project", "ar": "مشروع", "ur": "پروجیکٹ"},
+      "fields": [
+        {"id": "title", "type": "text", "required": true, "labels": {"en": "Project Title", "ar": "عنوان المشروع", "ur": "پروجیکٹ کا عنوان"}},
+        {"id": "description", "type": "textarea", "required": true, "labels": {"en": "Description", "ar": "الوصف", "ur": "تفصیل"}},
+        {"id": "image", "type": "imageUrl", "required": false, "labels": {"en": "Project Image", "ar": "صورة المشروع", "ur": "پروجیکٹ کی تصویر"}},
+        {"id": "link", "type": "text", "required": false, "labels": {"en": "Project Link", "ar": "رابط المشروع", "ur": "پروجیکٹ لنک"}}
+      ]
+    },
+    {
+      "id": "customize",
+      "type": "customize",
+      "labels": {"en": "Customize", "ar": "تخصيص", "ur": "ترتیب"},
+      "icon": "palette",
+      "colors": [
+        {"id": "primary", "labels": {"en": "Primary Color", "ar": "اللون الأساسي", "ur": "بنیادی رنگ"}, "default": "#6366F1"},
+        {"id": "secondary", "labels": {"en": "Secondary Color", "ar": "اللون الثانوي", "ur": "ثانوی رنگ"}, "default": "#EC4899"},
+        {"id": "background", "labels": {"en": "Background", "ar": "الخلفية", "ur": "پس منظر"}, "default": "#0F172A"},
+        {"id": "text", "labels": {"en": "Text Color", "ar": "لون النص", "ur": "متن کا رنگ"}, "default": "#F8FAFC"},
+        {"id": "cardBg", "labels": {"en": "Card Background", "ar": "خلفية البطاقة", "ur": "کارڈ کا پس منظر"}, "default": "#1E293B"}
+      ],
+      "fonts": {
+        "heading": {
+          "labels": {"en": "Heading Font", "ar": "خط العنوان", "ur": "سرخی کا فونٹ"},
+          "options": ["Inter", "Poppins", "Space Grotesk", "Montserrat", "Playfair Display", "Cairo"],
+          "default": "Space Grotesk"
+        },
+        "body": {
+          "labels": {"en": "Body Font", "ar": "خط النص", "ur": "متن کا فونٹ"},
+          "options": ["Inter", "Open Sans", "Roboto", "Lato", "Source Sans Pro", "Cairo"],
+          "default": "Inter"
+        }
+      },
+      "direction": {
+        "labels": {"en": "Text Direction", "ar": "اتجاه النص", "ur": "متن کی سمت"},
+        "options": ["ltr", "rtl"],
+        "default": "ltr",
+        "perChapter": false
+      }
+    }
+  ]
+}

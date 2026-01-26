@@ -1,0 +1,203 @@
+{
+  "id": "habit-tracker-v1",
+  "name": "Habit Tracker",
+  "version": 2,
+  "labels": {
+    "en": "Habit Tracker",
+    "ar": "متتبع العادات"
+  },
+  "description": {
+    "en": "Track daily habits, goals, and routines. Perfect for students, professionals, or anyone building better habits. All data stays on device.",
+    "ar": "تتبع العادات اليومية والأهداف والروتين. مثالي للطلاب والمهنيين أو أي شخص يبني عادات أفضل. جميع البيانات تبقى على الجهاز."
+  },
+  "sections": [
+    {
+      "id": "basics",
+      "type": "form",
+      "labels": {"en": "App Setup", "ar": "إعداد التطبيق"},
+      "icon": "settings",
+      "fields": [
+        {
+          "id": "title",
+          "type": "text",
+          "labels": {"en": "App Title", "ar": "عنوان التطبيق"},
+          "required": true,
+          "placeholder": {"en": "My Daily Habits", "ar": "عاداتي اليومية"},
+          "hint": {"en": "This will be the name of your habit tracker app", "ar": "سيكون هذا اسم تطبيق تتبع العادات"}
+        },
+        {
+          "id": "subtitle",
+          "type": "text",
+          "labels": {"en": "Tagline", "ar": "الشعار"},
+          "placeholder": {"en": "Build better habits, one day at a time", "ar": "ابنِ عادات أفضل، يوماً بيوم"}
+        },
+        {
+          "id": "icon",
+          "type": "image",
+          "labels": {"en": "App Icon", "ar": "أيقونة التطبيق"},
+          "hint": {"en": "Square image, 512x512 recommended", "ar": "صورة مربعة، 512×512 موصى بها"}
+        },
+        {
+          "id": "resetTime",
+          "type": "select",
+          "labels": {"en": "Daily Reset Time", "ar": "وقت إعادة التعيين اليومي"},
+          "options": [
+            {"value": "00:00", "label": {"en": "Midnight (12:00 AM)", "ar": "منتصف الليل (12:00 ص)"}},
+            {"value": "03:00", "label": {"en": "3:00 AM", "ar": "3:00 ص"}},
+            {"value": "04:00", "label": {"en": "4:00 AM (Fajr)", "ar": "4:00 ص (الفجر)"}},
+            {"value": "05:00", "label": {"en": "5:00 AM", "ar": "5:00 ص"}},
+            {"value": "06:00", "label": {"en": "6:00 AM", "ar": "6:00 ص"}}
+          ],
+          "default": "00:00",
+          "hint": {"en": "When should a new day start for habit tracking?", "ar": "متى يجب أن يبدأ يوم جديد لتتبع العادات؟"}
+        },
+        {
+          "id": "weekStart",
+          "type": "select",
+          "labels": {"en": "Week Starts On", "ar": "بداية الأسبوع"},
+          "options": [
+            {"value": "0", "label": {"en": "Sunday", "ar": "الأحد"}},
+            {"value": "1", "label": {"en": "Monday", "ar": "الاثنين"}},
+            {"value": "6", "label": {"en": "Saturday", "ar": "السبت"}}
+          ],
+          "default": "0"
+        },
+        {
+          "id": "enableReminders",
+          "type": "checkbox",
+          "labels": {"en": "Enable Daily Reminders", "ar": "تفعيل التذكيرات اليومية"},
+          "default": true
+        },
+        {
+          "id": "enableDriveBackup",
+          "type": "checkbox",
+          "labels": {"en": "Enable Google Drive Backup", "ar": "تفعيل النسخ الاحتياطي على جوجل درايف"},
+          "hint": {"en": "Sync data to Google Drive (requires login)", "ar": "مزامنة البيانات مع جوجل درايف (يتطلب تسجيل الدخول)"},
+          "default": false
+        }
+      ]
+    },
+    {
+      "id": "habits",
+      "type": "list",
+      "labels": {"en": "Habits", "ar": "العادات"},
+      "icon": "check_circle",
+      "minCount": 1,
+      "maxCount": 50,
+      "itemLabels": {"en": "Habit", "ar": "عادة"},
+      "fields": [
+        {
+          "id": "name",
+          "type": "text",
+          "labels": {"en": "Habit Name", "ar": "اسم العادة"},
+          "required": true,
+          "placeholder": {"en": "Drink 8 glasses of water", "ar": "شرب 8 أكواب ماء"}
+        },
+        {
+          "id": "icon",
+          "type": "text",
+          "labels": {"en": "Emoji Icon", "ar": "أيقونة إيموجي"},
+          "placeholder": {"en": "💧", "ar": "💧"},
+          "hint": {"en": "Single emoji to represent this habit", "ar": "إيموجي واحد لتمثيل هذه العادة"}
+        },
+        {
+          "id": "category",
+          "type": "select",
+          "labels": {"en": "Category", "ar": "الفئة"},
+          "options": [
+            {"value": "health", "label": {"en": "Health & Fitness", "ar": "الصحة واللياقة"}},
+            {"value": "spiritual", "label": {"en": "Spiritual / Religious", "ar": "روحي / ديني"}},
+            {"value": "learning", "label": {"en": "Learning & Growth", "ar": "التعلم والنمو"}},
+            {"value": "productivity", "label": {"en": "Productivity", "ar": "الإنتاجية"}},
+            {"value": "mindfulness", "label": {"en": "Mindfulness", "ar": "اليقظة"}},
+            {"value": "social", "label": {"en": "Social & Relationships", "ar": "اجتماعي وعلاقات"}},
+            {"value": "other", "label": {"en": "Other", "ar": "أخرى"}}
+          ],
+          "default": "other"
+        },
+        {
+          "id": "frequency",
+          "type": "select",
+          "labels": {"en": "Frequency", "ar": "التكرار"},
+          "options": [
+            {"value": "daily", "label": {"en": "Daily", "ar": "يومي"}},
+            {"value": "weekdays", "label": {"en": "Weekdays Only", "ar": "أيام الأسبوع فقط"}},
+            {"value": "weekends", "label": {"en": "Weekends Only", "ar": "عطلة نهاية الأسبوع فقط"}},
+            {"value": "custom", "label": {"en": "Custom Days", "ar": "أيام مخصصة"}}
+          ],
+          "default": "daily"
+        },
+        {
+          "id": "targetCount",
+          "type": "number",
+          "labels": {"en": "Daily Target", "ar": "الهدف اليومي"},
+          "placeholder": {"en": "1", "ar": "1"},
+          "hint": {"en": "How many times per day? (leave 1 for simple check)", "ar": "كم مرة في اليوم؟ (اترك 1 للتحقق البسيط)"},
+          "default": 1
+        },
+        {
+          "id": "color",
+          "type": "color",
+          "labels": {"en": "Color", "ar": "اللون"},
+          "default": "#4CAF50"
+        },
+        {
+          "id": "notes",
+          "type": "textarea",
+          "labels": {"en": "Notes / Instructions", "ar": "ملاحظات / تعليمات"},
+          "placeholder": {"en": "Why is this habit important to you?", "ar": "لماذا هذه العادة مهمة لك؟"}
+        }
+      ]
+    },
+    {
+      "id": "customize",
+      "type": "customize",
+      "labels": {"en": "Theme", "ar": "المظهر"},
+      "icon": "palette",
+      "colors": [
+        {
+          "id": "primary",
+          "labels": {"en": "Primary Color", "ar": "اللون الأساسي"},
+          "default": "#6200EE"
+        },
+        {
+          "id": "secondary",
+          "labels": {"en": "Accent Color", "ar": "لون التمييز"},
+          "default": "#03DAC6"
+        },
+        {
+          "id": "background",
+          "labels": {"en": "Background", "ar": "الخلفية"},
+          "default": "#121212"
+        },
+        {
+          "id": "surface",
+          "labels": {"en": "Card Background", "ar": "خلفية البطاقة"},
+          "default": "#1E1E1E"
+        },
+        {
+          "id": "text",
+          "labels": {"en": "Text Color", "ar": "لون النص"},
+          "default": "#FFFFFF"
+        }
+      ],
+      "fonts": {
+        "heading": {
+          "labels": {"en": "Heading Font", "ar": "خط العناوين"},
+          "options": ["Poppins", "Montserrat", "Inter", "Roboto", "Space Grotesk"],
+          "default": "Poppins"
+        },
+        "body": {
+          "labels": {"en": "Body Font", "ar": "خط النص"},
+          "options": ["Inter", "Roboto", "Open Sans", "Lato", "Noto Sans Arabic"],
+          "default": "Inter"
+        }
+      },
+      "direction": {
+        "labels": {"en": "Text Direction", "ar": "اتجاه النص"},
+        "default": "auto"
+      }
+    }
+  ]
+}
+

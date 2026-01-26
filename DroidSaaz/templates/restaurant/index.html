@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title id="pageTitle">Restaurant</title>
+    <link rel="stylesheet" href="../../shared/utils.css">
+    <link rel="stylesheet" href="styles/restaurant.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Open+Sans:wght@400;600&family=Montserrat:wght@400;700&family=Lobster&family=Dancing+Script&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+    <!-- Hero Section -->
+    <header class="hero" id="heroSection">
+        <div class="hero-overlay"></div>
+        <img id="coverImage" class="hero-bg" src="" alt="">
+        <div class="hero-content">
+            <img id="logoImage" class="logo" src="" alt="Logo">
+            <h1 id="businessName">Business Name</h1>
+            <p id="tagline" class="tagline"></p>
+        </div>
+    </header>
+
+    <!-- Quick Actions -->
+    <nav class="quick-actions" id="quickActions">
+        <a href="#" id="btnCall" class="action-btn" onclick="makeCall()">
+            <span class="material-icons">call</span>
+            <span>Call</span>
+        </a>
+        <a href="#" id="btnWhatsApp" class="action-btn" onclick="openWhatsApp()">
+            <span class="material-icons">chat</span>
+            <span>WhatsApp</span>
+        </a>
+        <a href="#" id="btnMap" class="action-btn" onclick="openMap()">
+            <span class="material-icons">location_on</span>
+            <span>Map</span>
+        </a>
+        <a href="#menu" class="action-btn">
+            <span class="material-icons">restaurant_menu</span>
+            <span>Menu</span>
+        </a>
+    </nav>
+
+    <!-- Tabs Navigation -->
+    <nav class="tabs-nav">
+        <button class="tab-btn active" data-tab="menu">
+            <span class="material-icons">restaurant_menu</span>
+            Menu
+        </button>
+        <button class="tab-btn" data-tab="about">
+            <span class="material-icons">info</span>
+            About
+        </button>
+        <button class="tab-btn" data-tab="gallery">
+            <span class="material-icons">photo_library</span>
+            Gallery
+        </button>
+        <button class="tab-btn" data-tab="contact">
+            <span class="material-icons">contact_phone</span>
+            Contact
+        </button>
+    </nav>
+
+    <!-- Menu Tab -->
+    <section id="menu" class="tab-content active">
+        <div class="section-header">
+            <h2>Our Menu</h2>
+            <div class="category-filter" id="categoryFilter"></div>
+        </div>
+        <div id="menuItems" class="menu-grid"></div>
+    </section>
+
+    <!-- About Tab -->
+    <section id="about" class="tab-content">
+        <div class="about-section">
+            <h2>About Us</h2>
+            <div id="aboutContent" class="about-text"></div>
+        </div>
+        <div class="hours-section">
+            <h3><span class="material-icons">schedule</span> Hours</h3>
+            <pre id="businessHours"></pre>
+        </div>
+    </section>
+
+    <!-- Gallery Tab -->
+    <section id="gallery" class="tab-content">
+        <h2>Photo Gallery</h2>
+        <div id="galleryGrid" class="gallery-grid"></div>
+    </section>
+
+    <!-- Contact Tab -->
+    <section id="contact" class="tab-content">
+        <h2>Contact Us</h2>
+        <div class="contact-cards">
+            <div class="contact-card" id="cardPhone" onclick="makeCall()">
+                <span class="material-icons">phone</span>
+                <span id="phoneNumber"></span>
+            </div>
+            <div class="contact-card" id="cardWhatsApp" onclick="openWhatsApp()">
+                <span class="material-icons">chat</span>
+                <span>WhatsApp</span>
+            </div>
+            <div class="contact-card" id="cardEmail" onclick="sendEmail()">
+                <span class="material-icons">email</span>
+                <span id="emailAddress"></span>
+            </div>
+            <div class="contact-card" id="cardAddress" onclick="openMap()">
+                <span class="material-icons">location_on</span>
+                <span id="businessAddress"></span>
+            </div>
+        </div>
+
+        <!-- Social Links -->
+        <div class="social-links" id="socialLinks">
+            <h3>Follow Us</h3>
+            <div class="social-icons"></div>
+        </div>
+    </section>
+
+    <!-- Image Modal -->
+    <div class="modal" id="imageModal">
+        <button class="modal-close" onclick="closeModal()">&times;</button>
+        <img id="modalImage" src="" alt="">
+    </div>
+
+    <script src="scripts/app.js"></script>
+</body>
+</html>
+

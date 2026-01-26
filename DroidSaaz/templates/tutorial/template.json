@@ -1,0 +1,196 @@
+{
+  "id": "tutorial-v1",
+  "name": "Tutorial & Course",
+  "version": 2,
+  "labels": {
+    "en": "Tutorial & Course",
+    "ar": "دورة تعليمية"
+  },
+  "description": {
+    "en": "Create educational content with lessons, quizzes, and completion certificates. Perfect for courses, training, and tutorials.",
+    "ar": "أنشئ محتوى تعليمي مع دروس واختبارات وشهادات إتمام. مثالي للدورات والتدريب والبرامج التعليمية."
+  },
+  "sections": [
+    {
+      "id": "course",
+      "type": "form",
+      "labels": {"en": "Course Info", "ar": "معلومات الدورة"},
+      "icon": "school",
+      "fields": [
+        {
+          "id": "title",
+          "type": "text",
+          "labels": {"en": "Course Title", "ar": "عنوان الدورة"},
+          "required": true,
+          "placeholder": {"en": "Introduction to Web Development", "ar": "مقدمة في تطوير الويب"}
+        },
+        {
+          "id": "subtitle",
+          "type": "text",
+          "labels": {"en": "Subtitle", "ar": "العنوان الفرعي"},
+          "placeholder": {"en": "Learn HTML, CSS & JavaScript", "ar": "تعلم HTML و CSS و JavaScript"}
+        },
+        {
+          "id": "cover",
+          "type": "image",
+          "labels": {"en": "Course Cover", "ar": "غلاف الدورة"},
+          "hint": {"en": "Landscape image (16:9 recommended)", "ar": "صورة أفقية (16:9 موصى بها)"}
+        },
+        {
+          "id": "instructor",
+          "type": "text",
+          "labels": {"en": "Instructor Name", "ar": "اسم المدرب"},
+          "placeholder": {"en": "John Doe", "ar": "محمد أحمد"}
+        },
+        {
+          "id": "instructorPhoto",
+          "type": "image",
+          "labels": {"en": "Instructor Photo", "ar": "صورة المدرب"}
+        },
+        {
+          "id": "description",
+          "type": "markdown",
+          "labels": {"en": "Course Description", "ar": "وصف الدورة"},
+          "placeholder": {"en": "What will students learn?", "ar": "ماذا سيتعلم الطلاب؟"}
+        },
+        {
+          "id": "duration",
+          "type": "text",
+          "labels": {"en": "Estimated Duration", "ar": "المدة المتوقعة"},
+          "placeholder": {"en": "2 hours", "ar": "ساعتان"}
+        },
+        {
+          "id": "level",
+          "type": "select",
+          "labels": {"en": "Difficulty Level", "ar": "مستوى الصعوبة"},
+          "options": [
+            {"value": "beginner", "label": {"en": "Beginner", "ar": "مبتدئ"}},
+            {"value": "intermediate", "label": {"en": "Intermediate", "ar": "متوسط"}},
+            {"value": "advanced", "label": {"en": "Advanced", "ar": "متقدم"}}
+          ],
+          "default": "beginner"
+        },
+        {
+          "id": "passingScore",
+          "type": "number",
+          "labels": {"en": "Passing Score (%)", "ar": "درجة النجاح (%)"},
+          "placeholder": {"en": "70", "ar": "70"},
+          "default": 70,
+          "hint": {"en": "Minimum score to pass quizzes and get certificate", "ar": "الحد الأدنى للنجاح والحصول على الشهادة"}
+        },
+        {
+          "id": "enableCertificate",
+          "type": "checkbox",
+          "labels": {"en": "Enable Completion Certificate", "ar": "تفعيل شهادة الإتمام"},
+          "default": true
+        },
+        {
+          "id": "certificateTitle",
+          "type": "text",
+          "labels": {"en": "Certificate Title", "ar": "عنوان الشهادة"},
+          "placeholder": {"en": "Certificate of Completion", "ar": "شهادة إتمام"},
+          "default": "Certificate of Completion"
+        },
+        {
+          "id": "organizationName",
+          "type": "text",
+          "labels": {"en": "Organization/Issuer Name", "ar": "اسم المؤسسة/الجهة المانحة"},
+          "placeholder": {"en": "Your Academy", "ar": "أكاديميتك"}
+        },
+        {
+          "id": "organizationLogo",
+          "type": "image",
+          "labels": {"en": "Organization Logo (for certificate)", "ar": "شعار المؤسسة (للشهادة)"}
+        }
+      ]
+    },
+    {
+      "id": "lessons",
+      "type": "list",
+      "labels": {"en": "Lessons", "ar": "الدروس"},
+      "icon": "menu_book",
+      "minCount": 1,
+      "maxCount": 100,
+      "itemLabels": {"en": "Lesson", "ar": "درس"},
+      "fields": [
+        {
+          "id": "title",
+          "type": "text",
+          "labels": {"en": "Lesson Title", "ar": "عنوان الدرس"},
+          "required": true
+        },
+        {
+          "id": "content",
+          "type": "markdown",
+          "labels": {"en": "Lesson Content", "ar": "محتوى الدرس"},
+          "hint": {"en": "Supports markdown formatting", "ar": "يدعم تنسيق Markdown"}
+        },
+        {
+          "id": "videoUrl",
+          "type": "text",
+          "labels": {"en": "Video URL (optional)", "ar": "رابط الفيديو (اختياري)"},
+          "placeholder": {"en": "https://youtube.com/watch?v=...", "ar": "https://youtube.com/watch?v=..."},
+          "hint": {"en": "YouTube or direct video link", "ar": "رابط يوتيوب أو رابط فيديو مباشر"}
+        },
+        {
+          "id": "hasQuiz",
+          "type": "checkbox",
+          "labels": {"en": "Add Quiz to This Lesson", "ar": "إضافة اختبار لهذا الدرس"},
+          "default": false
+        },
+        {
+          "id": "quizQuestions",
+          "type": "textarea",
+          "labels": {"en": "Quiz Questions (JSON)", "ar": "أسئلة الاختبار (JSON)"},
+          "placeholder": {"en": "[{\"q\":\"Question?\",\"options\":[\"A\",\"B\",\"C\"],\"answer\":0}]", "ar": "[{\"q\":\"السؤال؟\",\"options\":[\"أ\",\"ب\",\"ج\"],\"answer\":0}]"},
+          "hint": {"en": "JSON array of questions with options and correct answer index", "ar": "مصفوفة JSON من الأسئلة مع الخيارات ورقم الإجابة الصحيحة"}
+        }
+      ]
+    },
+    {
+      "id": "customize",
+      "type": "customize",
+      "labels": {"en": "Theme", "ar": "المظهر"},
+      "icon": "palette",
+      "colors": [
+        {
+          "id": "primary",
+          "labels": {"en": "Primary Color", "ar": "اللون الأساسي"},
+          "default": "#1976D2"
+        },
+        {
+          "id": "secondary",
+          "labels": {"en": "Accent Color", "ar": "لون التمييز"},
+          "default": "#FF9800"
+        },
+        {
+          "id": "background",
+          "labels": {"en": "Background", "ar": "الخلفية"},
+          "default": "#FFFFFF"
+        },
+        {
+          "id": "text",
+          "labels": {"en": "Text Color", "ar": "لون النص"},
+          "default": "#212121"
+        }
+      ],
+      "fonts": {
+        "heading": {
+          "labels": {"en": "Heading Font", "ar": "خط العناوين"},
+          "options": ["Poppins", "Montserrat", "Roboto Slab", "Merriweather", "Noto Sans Arabic"],
+          "default": "Poppins"
+        },
+        "body": {
+          "labels": {"en": "Body Font", "ar": "خط النص"},
+          "options": ["Inter", "Roboto", "Open Sans", "Lato", "Noto Sans Arabic"],
+          "default": "Inter"
+        }
+      },
+      "direction": {
+        "labels": {"en": "Text Direction", "ar": "اتجاه النص"},
+        "default": "auto"
+      }
+    }
+  ]
+}
+

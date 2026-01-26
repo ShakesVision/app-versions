@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title id="pageTitle">Habit Tracker</title>
+    <link rel="stylesheet" href="../../shared/utils.css">
+    <link rel="stylesheet" href="styles/habit.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="header-title">
+                <h1 id="appTitle">Habit Tracker</h1>
+                <p id="appSubtitle" class="subtitle"></p>
+            </div>
+            <div class="header-actions">
+                <button class="icon-btn" id="btnStats" onclick="showStats()">
+                    <span class="material-icons-round">insights</span>
+                </button>
+                <button class="icon-btn" id="btnSettings" onclick="showSettings()">
+                    <span class="material-icons-round">settings</span>
+                </button>
+            </div>
+        </div>
+        <div class="date-nav">
+            <button class="date-btn" onclick="changeDate(-1)">
+                <span class="material-icons-round">chevron_left</span>
+            </button>
+            <button class="date-display" id="currentDate" onclick="goToToday()"></button>
+            <button class="date-btn" onclick="changeDate(1)">
+                <span class="material-icons-round">chevron_right</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Progress Ring -->
+    <section class="progress-section">
+        <div class="progress-ring-container">
+            <svg class="progress-ring" viewBox="0 0 120 120">
+                <circle class="progress-ring-bg" cx="60" cy="60" r="54" />
+                <circle class="progress-ring-fill" id="progressRing" cx="60" cy="60" r="54" />
+            </svg>
+            <div class="progress-text">
+                <span class="progress-percent" id="progressPercent">0%</span>
+                <span class="progress-label">completed</span>
+            </div>
+        </div>
+        <div class="streak-display">
+            <span class="material-icons-round">local_fire_department</span>
+            <span id="streakCount">0</span>
+            <span class="streak-label">day streak</span>
+        </div>
+    </section>
+
+    <!-- Habits List -->
+    <section class="habits-section">
+        <div class="section-header">
+            <h2>Today's Habits</h2>
+            <div class="category-filter" id="categoryFilter">
+                <button class="filter-chip active" data-category="all">All</button>
+            </div>
+        </div>
+        <div id="habitsList" class="habits-list"></div>
+    </section>
+
+    <!-- Stats Modal -->
+    <div class="modal" id="statsModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Statistics</h2>
+                <button class="icon-btn" onclick="closeModal('statsModal')">
+                    <span class="material-icons-round">close</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="stats-grid" id="statsGrid"></div>
+                <div class="chart-container">
+                    <h3>Weekly Progress</h3>
+                    <canvas id="weeklyChart" height="200"></canvas>
+                </div>
+                <div class="calendar-view">
+                    <h3>Monthly View</h3>
+                    <div id="monthCalendar" class="month-calendar"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div class="modal" id="settingsModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Settings</h2>
+                <button class="icon-btn" onclick="closeModal('settingsModal')">
+                    <span class="material-icons-round">close</span>
+                </button>
+            </div>
+            <div class="modal-body settings-body">
+                <div class="setting-item">
+                    <span class="material-icons-round">cloud_upload</span>
+                    <div class="setting-info">
+                        <span class="setting-title">Backup to Google Drive</span>
+                        <span class="setting-desc">Sync your data to the cloud</span>
+                    </div>
+                    <button class="btn-secondary" onclick="backupToDrive()">Backup</button>
+                </div>
+                <div class="setting-item">
+                    <span class="material-icons-round">cloud_download</span>
+                    <div class="setting-info">
+                        <span class="setting-title">Restore from Drive</span>
+                        <span class="setting-desc">Restore previous backup</span>
+                    </div>
+                    <button class="btn-secondary" onclick="restoreFromDrive()">Restore</button>
+                </div>
+                <div class="setting-item">
+                    <span class="material-icons-round">file_download</span>
+                    <div class="setting-info">
+                        <span class="setting-title">Export Data</span>
+                        <span class="setting-desc">Download as JSON file</span>
+                    </div>
+                    <button class="btn-secondary" onclick="exportData()">Export</button>
+                </div>
+                <div class="setting-item">
+                    <span class="material-icons-round">file_upload</span>
+                    <div class="setting-info">
+                        <span class="setting-title">Import Data</span>
+                        <span class="setting-desc">Load from JSON file</span>
+                    </div>
+                    <button class="btn-secondary" onclick="importData()">Import</button>
+                </div>
+                <input type="file" id="importInput" accept=".json" style="display:none" onchange="handleImport(event)">
+                <hr>
+                <div class="setting-item danger">
+                    <span class="material-icons-round">delete_forever</span>
+                    <div class="setting-info">
+                        <span class="setting-title">Reset All Data</span>
+                        <span class="setting-desc">Clear all habit data (cannot be undone)</span>
+                    </div>
+                    <button class="btn-danger" onclick="confirmReset()">Reset</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Habit Detail Modal -->
+    <div class="modal" id="habitModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="habitModalTitle">Habit Details</h2>
+                <button class="icon-btn" onclick="closeModal('habitModal')">
+                    <span class="material-icons-round">close</span>
+                </button>
+            </div>
+            <div class="modal-body" id="habitModalBody"></div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast"></div>
+
+    <script src="scripts/app.js"></script>
+</body>
+</html>
+

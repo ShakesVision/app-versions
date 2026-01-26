@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title id="pageTitle">Tutorial</title>
+    <link rel="stylesheet" href="../../shared/utils.css">
+    <link rel="stylesheet" href="styles/tutorial.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+</head>
+<body>
+    <!-- Course Header -->
+    <header class="course-header">
+        <img id="courseCover" class="course-cover" src="" alt="">
+        <div class="course-overlay"></div>
+        <div class="course-info">
+            <span class="course-level" id="courseLevel">Beginner</span>
+            <h1 id="courseTitle">Course Title</h1>
+            <p id="courseSubtitle" class="course-subtitle"></p>
+            <div class="course-meta">
+                <span><span class="material-icons-round">schedule</span> <span id="courseDuration">—</span></span>
+                <span><span class="material-icons-round">menu_book</span> <span id="lessonCount">0</span> lessons</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Progress Bar -->
+    <div class="progress-bar-container">
+        <div class="progress-bar" id="progressBar"></div>
+        <span class="progress-text" id="progressText">0% Complete</span>
+    </div>
+
+    <!-- Navigation Tabs -->
+    <nav class="tabs-nav">
+        <button class="tab-btn active" data-tab="lessons">
+            <span class="material-icons-round">menu_book</span>
+            Lessons
+        </button>
+        <button class="tab-btn" data-tab="about">
+            <span class="material-icons-round">info</span>
+            About
+        </button>
+        <button class="tab-btn" data-tab="certificate" id="tabCertificate">
+            <span class="material-icons-round">workspace_premium</span>
+            Certificate
+        </button>
+    </nav>
+
+    <!-- Lessons Tab -->
+    <section id="lessons" class="tab-content active">
+        <div id="lessonsList" class="lessons-list"></div>
+    </section>
+
+    <!-- About Tab -->
+    <section id="about" class="tab-content">
+        <div class="instructor-card" id="instructorCard">
+            <img id="instructorPhoto" class="instructor-photo" src="" alt="">
+            <div class="instructor-info">
+                <span class="instructor-label">Instructor</span>
+                <h3 id="instructorName">Instructor</h3>
+            </div>
+        </div>
+        <div class="about-content">
+            <h3>About This Course</h3>
+            <div id="courseDescription"></div>
+        </div>
+    </section>
+
+    <!-- Certificate Tab -->
+    <section id="certificate" class="tab-content">
+        <div class="certificate-section" id="certificateSection">
+            <div class="certificate-locked" id="certificateLocked">
+                <span class="material-icons-round">lock</span>
+                <h3>Complete the Course</h3>
+                <p>Finish all lessons and pass the quizzes to unlock your certificate.</p>
+                <div class="requirement-list" id="requirementList"></div>
+            </div>
+            <div class="certificate-unlocked" id="certificateUnlocked" style="display:none">
+                <span class="material-icons-round">workspace_premium</span>
+                <h3>Congratulations!</h3>
+                <p>You've completed the course. Enter your name to generate your certificate.</p>
+                <input type="text" id="studentName" class="name-input" placeholder="Your Full Name">
+                <button class="btn-primary" onclick="generateCertificate()">Generate Certificate</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lesson Modal -->
+    <div class="modal" id="lessonModal">
+        <div class="modal-content full">
+            <div class="modal-header">
+                <button class="icon-btn" onclick="closeLessonModal()">
+                    <span class="material-icons-round">arrow_back</span>
+                </button>
+                <h2 id="lessonModalTitle">Lesson</h2>
+                <div class="lesson-nav">
+                    <button class="icon-btn" id="btnPrevLesson" onclick="prevLesson()">
+                        <span class="material-icons-round">chevron_left</span>
+                    </button>
+                    <button class="icon-btn" id="btnNextLesson" onclick="nextLesson()">
+                        <span class="material-icons-round">chevron_right</span>
+                    </button>
+                </div>
+            </div>
+            <div class="modal-body" id="lessonModalBody"></div>
+            <div class="modal-footer">
+                <button class="btn-secondary" onclick="closeLessonModal()">Back to Lessons</button>
+                <button class="btn-primary" id="btnMarkComplete" onclick="markLessonComplete()">
+                    Mark as Complete
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quiz Modal -->
+    <div class="modal" id="quizModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Quiz</h2>
+                <button class="icon-btn" onclick="closeModal('quizModal')">
+                    <span class="material-icons-round">close</span>
+                </button>
+            </div>
+            <div class="modal-body" id="quizModalBody"></div>
+        </div>
+    </div>
+
+    <!-- Certificate Modal -->
+    <div class="modal" id="certModal">
+        <div class="modal-content certificate-modal">
+            <div class="modal-header">
+                <h2>Your Certificate</h2>
+                <button class="icon-btn" onclick="closeModal('certModal')">
+                    <span class="material-icons-round">close</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <canvas id="certificateCanvas" width="800" height="600"></canvas>
+                <div class="cert-actions">
+                    <button class="btn-primary" onclick="downloadCertificate()">
+                        <span class="material-icons-round">download</span>
+                        Download
+                    </button>
+                    <button class="btn-secondary" onclick="shareCertificate()">
+                        <span class="material-icons-round">share</span>
+                        Share
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast"></div>
+
+    <script src="scripts/app.js"></script>
+</body>
+</html>
+
