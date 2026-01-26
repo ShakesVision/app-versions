@@ -1,27 +1,55 @@
 {
   "version": 2,
+  "baseUrl": "https://raw.githubusercontent.com/ShakesVision/app-versions/main/DroidSaaz",
   "templates": [
     {
       "id": "book-app-v1",
       "name": "Book App",
       "description": "Create a beautiful reading app with chapters, table of contents, and customizable themes",
-      "icon": "https://raw.githubusercontent.com/ShakesVision/app-versions/main/droidsaaz/templates/book-app/icon.png",
-      "preview": "https://raw.githubusercontent.com/ShakesVision/app-versions/main/droidsaaz/templates/book-app/preview.png",
-      "templateUrl": "https://github.com/ShakesVision/app-versions/raw/main/droidsaaz/templates/book-app/book-template.zip",
+      "icon": "templates/book-app/icon.png",
+      "preview": "templates/book-app/preview.png",
+      "templatePath": "templates/book-app",
+      "files": [
+        "template.json",
+        "index.html",
+        "styles/utils.css",
+        "styles/book.css",
+        "scripts/app.js"
+      ],
       "templateVersion": 1,
       "category": "reading",
-      "features": ["chapters", "toc", "dark-mode", "rtl-support", "custom-fonts"]
+      "features": [
+        "chapters",
+        "toc",
+        "dark-mode",
+        "rtl-support",
+        "custom-fonts"
+      ]
     },
     {
       "id": "pdf-viewer-v1",
       "name": "PDF / Image Book",
       "description": "Create a PDF-style viewer app from images. Perfect for ebooks, magazines, comics, and manuals",
-      "icon": "https://raw.githubusercontent.com/ShakesVision/app-versions/main/droidsaaz/templates/pdf-viewer/icon.png",
-      "preview": "https://raw.githubusercontent.com/ShakesVision/app-versions/main/droidsaaz/templates/pdf-viewer/preview.png",
-      "templateUrl": "https://github.com/ShakesVision/app-versions/raw/main/droidsaaz/templates/pdf-viewer/pdf-template.zip",
+      "icon": "templates/pdf-viewer/icon.png",
+      "preview": "templates/pdf-viewer/preview.png",
+      "templatePath": "templates/pdf-viewer",
+      "files": [
+        "template.json",
+        "index.html",
+        "styles/utils.css",
+        "styles/pdf.css",
+        "scripts/app.js"
+      ],
       "templateVersion": 1,
       "category": "reading",
-      "features": ["zoom", "thumbnails", "bookmarks", "dark-mode", "rtl-support", "fullscreen"]
+      "features": [
+        "zoom",
+        "thumbnails",
+        "bookmarks",
+        "dark-mode",
+        "rtl-support",
+        "fullscreen"
+      ]
     }
   ]
 }
