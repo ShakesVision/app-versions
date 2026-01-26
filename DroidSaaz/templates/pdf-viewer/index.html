@@ -1,158 +1,76 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{direction}}" dir="{{direction}}">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,user-scalable=yes">
-  <meta name="theme-color" content="#1E40AF">
-  <title>PDF Viewer</title>
-  <link rel="stylesheet" href="styles/utils.css">
-  <link rel="stylesheet" href="styles/pdf.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, maximum-scale=3.0">
+    <title>{{title}}</title>
+    <link rel="stylesheet" href="../../shared/utils.css">
+    <link rel="stylesheet" href="styles/pdf.css">
+    <style>
+        :root {
+            --primary-color: {{colors.primary}};
+            --background-color: {{colors.background}};
+            --toolbar-color: {{colors.toolbar}};
+        }
+    </style>
 </head>
 <body>
-  <!-- Loading Screen -->
-  <div id="loading" class="loading-screen">
-    <div class="spinner"></div>
-    <p>Loading...</p>
-  </div>
-
-  <!-- App Container -->
-  <div id="app" class="app hidden">
-    
     <!-- Header -->
-    <header id="header" class="header">
-      <button id="menuBtn" class="icon-btn" aria-label="Menu">
-        <svg width="24" height="24" fill="currentColor"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
-      </button>
-      <h1 id="headerTitle" class="header-title">Document</h1>
-      <div class="header-actions">
-        <button id="thumbnailBtn" class="icon-btn" aria-label="Thumbnails">
-          <svg width="24" height="24" fill="currentColor"><path d="M4 8h4V4H4v4zm6 12h4v-4h-4v4zm-6 0h4v-4H4v4zm0-6h4v-4H4v4zm6 0h4v-4h-4v4zm6-10v4h4V4h-4zm-6 4h4V4h-4v4zm6 6h4v-4h-4v4zm0 6h4v-4h-4v4z"/></svg>
-        </button>
-        <button id="settingsBtn" class="icon-btn" aria-label="Settings">
-          <svg width="24" height="24" fill="currentColor"><path d="M19.14 12.94c.04-.3.06-.61.06-.94s-.02-.64-.07-.94l2.03-1.58a.49.49 0 0 0 .12-.61l-1.92-3.32a.49.49 0 0 0-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54a.48.48 0 0 0-.48-.41h-3.84a.48.48 0 0 0-.47.41L9.25 5.35c-.59.24-1.13.57-1.62.94l-2.39-.96a.49.49 0 0 0-.59.22L2.74 8.87a.48.48 0 0 0 .12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58a.49.49 0 0 0-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6A3.6 3.6 0 1 1 12 8.4a3.6 3.6 0 0 1 0 7.2z"/></svg>
-        </button>
-      </div>
+    <header class="toolbar" id="toolbar">
+        <div class="toolbar-title">{{title}}</div>
+        <div class="toolbar-actions">
+            <button class="icon-btn" id="btnThumbnails" title="Thumbnails">
+                <svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M4 5v4h6V5H4zm8 0v4h6V5h-6zm-8 6v4h6v-4H4zm8 0v4h6v-4h-6zm-8 6v4h6v-4H4zm8 0v4h6v-4h-6z"/></svg>
+            </button>
+            <button class="icon-btn" id="btnFullscreen" title="Fullscreen">
+                <svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>
+            </button>
+        </div>
     </header>
 
-    <!-- Sidebar (TOC / Thumbnails) -->
-    <nav id="sidebar" class="sidebar">
-      <div class="sidebar-header">
-        <h2>Pages</h2>
-        <button id="closeSidebar" class="icon-btn">
-          <svg width="24" height="24" fill="currentColor"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
-        </button>
-      </div>
-      <div id="thumbnailList" class="thumbnail-list"></div>
-    </nav>
-
-    <!-- Overlay -->
-    <div id="overlay" class="overlay hidden"></div>
-
-    <!-- Main Content -->
-    <main id="viewer" class="viewer">
-      <!-- Cover Page -->
-      <section id="coverPage" class="cover-page">
-        <img id="coverImage" src="" alt="Cover" class="cover-image hidden">
-        <h1 id="bookTitle" class="book-title">Document Title</h1>
-        <p id="bookAuthor" class="book-author"></p>
-        <p id="bookDescription" class="book-description"></p>
-        <button id="startBtn" class="start-btn">Start Reading</button>
-      </section>
-
-      <!-- Page Container -->
-      <div id="pageContainer" class="page-container hidden">
-        <div id="pageWrapper" class="page-wrapper">
-          <img id="currentPage" src="" alt="Page" class="page-image">
+    <!-- Main Viewer -->
+    <main class="viewer" id="viewer">
+        <div class="pages-container" id="pagesContainer">
+            {{#each pages}}
+            <div class="page" data-page="{{@index}}">
+                <img src="{{this}}" alt="Page {{@index}}" loading="lazy">
+            </div>
+            {{/each}}
         </div>
-      </div>
     </main>
 
-    <!-- Navigation Bar -->
-    <footer id="navbar" class="navbar hidden">
-      <button id="prevBtn" class="nav-btn" disabled>
-        <svg width="20" height="20" fill="currentColor"><path d="M15.41 7.41 14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
-        <span>Prev</span>
-      </button>
-      <div class="page-indicator">
-        <input type="number" id="pageInput" class="page-input" min="1" value="1">
-        <span id="pageTotal">/ 1</span>
-      </div>
-      <button id="nextBtn" class="nav-btn">
-        <span>Next</span>
-        <svg width="20" height="20" fill="currentColor"><path d="M10 6 8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
-      </button>
-    </footer>
-
-    <!-- Settings Panel -->
-    <div id="settingsPanel" class="settings-panel hidden">
-      <div class="settings-header">
-        <h2>Settings</h2>
-        <button id="closeSettings" class="icon-btn">
-          <svg width="24" height="24" fill="currentColor"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+    <!-- Page Navigation -->
+    <nav class="page-nav" id="pageNav">
+        <button class="nav-btn" id="btnPrev">
+            <svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
         </button>
-      </div>
-      
-      <!-- Theme Selection -->
-      <div class="settings-section">
-        <label class="settings-label">Theme</label>
-        <div class="theme-options">
-          <button class="theme-btn active" data-theme="light">
-            <span class="theme-preview light"></span>
-            <span>Light</span>
-          </button>
-          <button class="theme-btn" data-theme="dark">
-            <span class="theme-preview dark"></span>
-            <span>Dark</span>
-          </button>
-          <button class="theme-btn" data-theme="sepia">
-            <span class="theme-preview sepia"></span>
-            <span>Sepia</span>
-          </button>
+        <span class="page-info">
+            <span id="currentPage">1</span> / <span id="totalPages">{{pages.length}}</span>
+        </span>
+        <button class="nav-btn" id="btnNext">
+            <svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+        </button>
+    </nav>
+
+    <!-- Thumbnails Panel -->
+    <aside class="thumbnails-panel" id="thumbnailsPanel">
+        <div class="thumbnails-header">
+            <span>Pages</span>
+            <button class="icon-btn" id="btnCloseThumbnails">
+                <svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+            </button>
         </div>
-      </div>
-
-      <!-- Zoom Control -->
-      <div class="settings-section">
-        <label class="settings-label">Zoom</label>
-        <div class="zoom-controls">
-          <button id="zoomOut" class="zoom-btn">−</button>
-          <span id="zoomLevel">100%</span>
-          <button id="zoomIn" class="zoom-btn">+</button>
-          <button id="zoomFit" class="zoom-btn">Fit</button>
+        <div class="thumbnails-grid" id="thumbnailsGrid">
+            {{#each pages}}
+            <div class="thumbnail" data-page="{{@index}}">
+                <img src="{{this}}" alt="Page {{@index}}">
+                <span class="thumbnail-number">{{@index}}</span>
+            </div>
+            {{/each}}
         </div>
-      </div>
+    </aside>
 
-      <!-- Fullscreen Toggle -->
-      <div class="settings-section">
-        <label class="settings-label">Display</label>
-        <button id="fullscreenBtn" class="fullscreen-btn">
-          <svg width="20" height="20" fill="currentColor"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>
-          <span>Fullscreen</span>
-        </button>
-      </div>
-
-      <!-- Bookmarks -->
-      <div class="settings-section">
-        <label class="settings-label">Bookmark Current Page</label>
-        <button id="bookmarkBtn" class="bookmark-btn">
-          <svg width="20" height="20" fill="currentColor"><path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z"/></svg>
-          <span>Add Bookmark</span>
-        </button>
-      </div>
-
-      <!-- Bookmarks List -->
-      <div class="settings-section" id="bookmarkSection">
-        <label class="settings-label">Bookmarks</label>
-        <div id="bookmarkList" class="bookmark-list"></div>
-      </div>
-    </div>
-
-    <!-- Zoom indicator (shows briefly after pinch) -->
-    <div id="zoomIndicator" class="zoom-indicator hidden">100%</div>
-
-  </div>
-
-  <script src="scripts/app.js"></script>
+    <script src="scripts/app.js"></script>
 </body>
 </html>
 

@@ -1,111 +1,70 @@
 {
   "id": "pdf-viewer-v1",
   "name": "PDF / Image Book",
-  "version": 1,
-  "description": {
-    "en": "Create a beautiful PDF-style viewer app from images or PDF pages. Perfect for ebooks, magazines, comics, and manuals.",
-    "ar": "إنشاء تطبيق عارض PDF جميل من الصور أو صفحات PDF. مثالي للكتب الإلكترونية والمجلات والقصص المصورة والأدلة.",
-    "ur": "تصاویر یا PDF صفحات سے ایک خوبصورت PDF طرز کا ویوور ایپ بنائیں۔ ای بکس، میگزین، کامکس اور مینولز کے لیے بہترین۔"
-  },
+  "version": 2,
   
-  "fields": [
+  "sections": [
     {
-      "id": "title",
-      "type": "text",
-      "required": true,
-      "labels": {"en": "Book/Document Title", "ar": "عنوان الكتاب/المستند", "ur": "کتاب/دستاویز کا عنوان"},
-      "placeholder": {"en": "Enter title", "ar": "أدخل العنوان", "ur": "عنوان درج کریں"},
-      "maxLength": 100
+      "id": "content",
+      "type": "form",
+      "labels": {"en": "Content", "ar": "المحتوى", "ur": "مواد"},
+      "icon": "edit",
+      "fields": [
+        {
+          "id": "title",
+          "type": "text",
+          "required": true,
+          "labels": {"en": "Book Title", "ar": "عنوان الكتاب", "ur": "کتاب کا عنوان"},
+          "placeholder": {"en": "Enter book title", "ar": "أدخل عنوان الكتاب", "ur": "کتاب کا عنوان درج کریں"},
+          "maxLength": 100
+        },
+        {
+          "id": "author",
+          "type": "text",
+          "required": false,
+          "labels": {"en": "Author Name", "ar": "اسم المؤلف", "ur": "مصنف کا نام"},
+          "placeholder": {"en": "Enter author name (optional)", "ar": "أدخل اسم المؤلف (اختياري)", "ur": "مصنف کا نام درج کریں (اختیاری)"}
+        },
+        {
+          "id": "cover",
+          "type": "image",
+          "required": false,
+          "labels": {"en": "Cover Image", "ar": "صورة الغلاف", "ur": "سرورق کی تصویر"},
+          "aspectRatio": "2:3"
+        },
+        {
+          "id": "pages",
+          "type": "images",
+          "required": true,
+          "labels": {"en": "Book Pages", "ar": "صفحات الكتاب", "ur": "کتاب کے صفحات"},
+          "placeholder": {"en": "Select PDF pages or images", "ar": "اختر صفحات PDF أو صور", "ur": "PDF صفحات یا تصاویر منتخب کریں"}
+        },
+        {
+          "id": "description",
+          "type": "textarea",
+          "required": false,
+          "labels": {"en": "Description", "ar": "وصف", "ur": "تفصیل"},
+          "placeholder": {"en": "Brief description of the book", "ar": "وصف موجز للكتاب", "ur": "کتاب کی مختصر تفصیل"},
+          "maxLength": 500
+        }
+      ]
     },
     {
-      "id": "author",
-      "type": "text",
-      "required": false,
-      "labels": {"en": "Author/Publisher", "ar": "المؤلف/الناشر", "ur": "مصنف/ناشر"},
-      "placeholder": {"en": "Enter author or publisher name", "ar": "أدخل اسم المؤلف أو الناشر", "ur": "مصنف یا ناشر کا نام درج کریں"}
-    },
-    {
-      "id": "cover",
-      "type": "imageUrl",
-      "required": false,
-      "labels": {"en": "Cover Image", "ar": "صورة الغلاف", "ur": "سرورق کی تصویر"},
-      "aspectRatio": "3:4",
-      "accept": "file,url,gdrive",
-      "hint": {
-        "en": "Optional cover image for the title page",
-        "ar": "صورة غلاف اختيارية للصفحة الأولى",
-        "ur": "عنوان صفحے کے لیے اختیاری سرورق تصویر"
+      "id": "customize",
+      "type": "customize",
+      "labels": {"en": "Customize", "ar": "تخصيص", "ur": "ترتیب"},
+      "icon": "palette",
+      "colors": [
+        {"id": "primary", "labels": {"en": "Primary Color", "ar": "اللون الأساسي", "ur": "بنیادی رنگ"}, "default": "#1976D2"},
+        {"id": "background", "labels": {"en": "Background", "ar": "الخلفية", "ur": "پس منظر"}, "default": "#F5F5F5"},
+        {"id": "toolbar", "labels": {"en": "Toolbar Color", "ar": "لون شريط الأدوات", "ur": "ٹول بار کا رنگ"}, "default": "#FFFFFF"}
+      ],
+      "direction": {
+        "labels": {"en": "Page Direction", "ar": "اتجاه الصفحة", "ur": "صفحے کی سمت"},
+        "options": ["ltr", "rtl"],
+        "default": "ltr",
+        "perChapter": false
       }
-    },
-    {
-      "id": "description",
-      "type": "textarea",
-      "required": false,
-      "labels": {"en": "Description", "ar": "الوصف", "ur": "تفصیل"},
-      "placeholder": {"en": "Brief description of the content", "ar": "وصف موجز للمحتوى", "ur": "مواد کی مختصر تفصیل"},
-      "maxLength": 500
     }
-  ],
-  
-  "pages": {
-    "enabled": true,
-    "minCount": 1,
-    "maxCount": 500,
-    "labels": {"en": "Page", "ar": "صفحة", "ur": "صفحہ"},
-    "addLabel": {"en": "Add Pages", "ar": "إضافة صفحات", "ur": "صفحات شامل کریں"},
-    "multiUpload": true,
-    "acceptedTypes": ["image/jpeg", "image/png", "image/webp"],
-    "fields": [
-      {
-        "id": "image",
-        "type": "imageUrl",
-        "required": true,
-        "labels": {"en": "Page Image", "ar": "صورة الصفحة", "ur": "صفحے کی تصویر"},
-        "accept": "file,url,gdrive"
-      },
-      {
-        "id": "label",
-        "type": "text",
-        "required": false,
-        "labels": {"en": "Page Label", "ar": "تسمية الصفحة", "ur": "صفحے کا لیبل"},
-        "placeholder": {"en": "Optional: Chapter name or page label", "ar": "اختياري: اسم الفصل أو تسمية الصفحة", "ur": "اختیاری: باب کا نام یا صفحے کا لیبل"}
-      }
-    ]
-  },
-  
-  "customization": {
-    "colors": [
-      {"id": "primary", "labels": {"en": "Primary Color", "ar": "اللون الأساسي", "ur": "بنیادی رنگ"}, "default": "#1E40AF"},
-      {"id": "background", "labels": {"en": "Background", "ar": "الخلفية", "ur": "پس منظر"}, "default": "#F8FAFC"},
-      {"id": "pageBackground", "labels": {"en": "Page Background", "ar": "خلفية الصفحة", "ur": "صفحے کا پس منظر"}, "default": "#FFFFFF"}
-    ],
-    "settings": {
-      "showPageNumbers": {
-        "type": "boolean",
-        "labels": {"en": "Show Page Numbers", "ar": "إظهار أرقام الصفحات", "ur": "صفحہ نمبر دکھائیں"},
-        "default": true
-      },
-      "showThumbnails": {
-        "type": "boolean",
-        "labels": {"en": "Show Thumbnails Panel", "ar": "إظهار لوحة المصغرات", "ur": "تھمب نیل پینل دکھائیں"},
-        "default": true
-      },
-      "enableZoom": {
-        "type": "boolean",
-        "labels": {"en": "Enable Pinch Zoom", "ar": "تمكين التكبير بالقرص", "ur": "پنچ زوم فعال کریں"},
-        "default": true
-      },
-      "rememberPage": {
-        "type": "boolean",
-        "labels": {"en": "Remember Last Page", "ar": "تذكر آخر صفحة", "ur": "آخری صفحہ یاد رکھیں"},
-        "default": true
-      }
-    },
-    "direction": {
-      "labels": {"en": "Reading Direction", "ar": "اتجاه القراءة", "ur": "پڑھنے کی سمت"},
-      "options": ["ltr", "rtl"],
-      "default": "ltr"
-    }
-  }
+  ]
 }
-

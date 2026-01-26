@@ -1,115 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-  <meta name="theme-color" content="#2196F3">
-  <title>Book</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;700&family=Merriweather:wght@400;700&family=Noto+Nastaliq+Urdu:wght@400;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles/utils.css">
-  <link rel="stylesheet" href="styles/book.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Book App</title>
+    <link rel="stylesheet" href="../../shared/utils.css">
+    <link rel="stylesheet" href="styles/book.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;700&family=Lora:wght@400;700&family=Merriweather:wght@400;700&family=Noto+Nastaliq+Urdu:wght@400;700&family=Open+Sans:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
-<body class="min-h-screen">
-  <!-- Loading -->
-  <div id="loading" class="fixed inset-0 flex flex-col items-center justify-center gap-4 z-100">
-    <div class="spinner animate-spin"></div>
-    <p class="text-muted">Loading...</p>
-  </div>
-
-  <!-- App -->
-  <div id="app" class="hidden">
-    <!-- Header -->
-    <header class="fixed top-0 left-0 right-0 h-14 bg-primary text-white flex items-center justify-between px-3 z-50 shadow safe-top">
-      <button id="menuBtn" class="p-3 rounded-full hover:bg-white/20 transition" aria-label="Menu">
-        <svg width="24" height="24" fill="currentColor"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
-      </button>
-      <h1 id="headerTitle" class="text-lg font-medium truncate flex-1 text-center px-2">Book</h1>
-      <button id="settingsBtn" class="p-3 rounded-full hover:bg-white/20 transition" aria-label="Settings">
-        <svg width="24" height="24" fill="currentColor"><path d="M19.14 12.94c.04-.3.06-.61.06-.94s-.02-.64-.07-.94l2.03-1.58a.49.49 0 0 0 .12-.61l-1.92-3.32a.49.49 0 0 0-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54a.48.48 0 0 0-.48-.41h-3.84a.48.48 0 0 0-.47.41L9.25 5.35c-.59.24-1.13.57-1.62.94l-2.39-.96a.49.49 0 0 0-.59.22L2.74 8.87a.48.48 0 0 0 .12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58a.49.49 0 0 0-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6A3.6 3.6 0 1 1 12 8.4a3.6 3.6 0 0 1 0 7.2z"/></svg>
-      </button>
-    </header>
-
-    <!-- Sidebar -->
-    <nav id="sidebar" class="sidebar fixed top-0 left-0 h-screen bg-surface z-100 shadow-lg -translate-x-full transition-transform overflow-y-auto overscroll-contain">
-      <div class="flex items-center justify-between p-4 border-b sticky top-0 bg-surface z-10">
-        <h2 class="font-semibold text-lg">Contents</h2>
-        <button id="closeSidebar" class="p-2 rounded-full hover:bg-black/50 transition">
-          <svg width="24" height="24" fill="currentColor"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
-        </button>
-      </div>
-      <ul id="tocList" class="py-2"></ul>
-    </nav>
-
-    <!-- Overlay -->
-    <div id="overlay" class="fixed inset-0 bg-black/50 z-50 opacity-0 hidden transition"></div>
-
-    <!-- Main Content -->
-    <main class="pt-16 pb-20 px-4 max-w-2xl mx-auto min-h-screen">
-      <!-- Cover -->
-      <section id="coverPage" class="flex flex-col items-center justify-center text-center min-h-screen py-10 animate-fadeIn">
-        <div class="flex-1 flex flex-col items-center justify-center">
-          <img id="coverImage" src="" alt="Cover" class="cover-img rounded-xl shadow-lg mb-6 hidden">
-          <h1 id="bookTitle" class="text-3xl font-bold text-primary mb-2">Book Title</h1>
-          <p id="bookAuthor" class="text-muted mb-4">by Author</p>
-          <p id="dedication" class="italic opacity-70 mb-6 hidden"></p>
-        </div>
-        <button id="startBtn" class="btn-primary rounded-full transition">Start Reading</button>
-      </section>
-
-      <!-- Chapters -->
-      <div id="chapters"></div>
-    </main>
-
-    <!-- Navigation -->
-    <footer class="fixed bottom-0 left-0 right-0 h-14 bg-surface border-t flex items-center justify-between px-4 z-50 safe-bottom">
-      <button id="prevBtn" class="nav-btn rounded-full flex items-center gap-1 transition disabled:opacity-40 disabled:cursor-not-allowed" disabled>
-        <svg width="20" height="20" fill="currentColor"><path d="M15.41 7.41 14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
-        <span class="text-sm">Prev</span>
-      </button>
-      <span id="pageNum" class="text-sm text-muted font-medium">1 / 1</span>
-      <button id="nextBtn" class="nav-btn rounded-full flex items-center gap-1 transition">
-        <span class="text-sm">Next</span>
-        <svg width="20" height="20" fill="currentColor"><path d="M10 6 8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
-      </button>
-    </footer>
-
-    <!-- Settings Panel -->
-    <div id="settingsPanel" class="fixed bottom-0 left-0 right-0 bg-surface rounded-t-xl shadow-lg p-5 z-100 translate-y-full transition-transform safe-bottom hidden">
-      <div class="flex items-center justify-between mb-6">
-        <h2 class="font-semibold text-lg">Settings</h2>
-        <button id="closeSettings" class="p-2 rounded-full hover:bg-black/50 transition">
-          <svg width="24" height="24" fill="currentColor"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
-        </button>
-      </div>
-      <!-- Font Size -->
-      <div class="mb-6">
-        <label class="text-sm text-muted mb-3 block">Font Size</label>
-        <div class="flex items-center gap-4">
-          <button id="fontDown" class="font-btn rounded-full">A−</button>
-          <span id="fontSize" class="font-medium w-12 text-center">16px</span>
-          <button id="fontUp" class="font-btn rounded-full">A+</button>
-        </div>
-      </div>
-      <!-- Theme -->
-      <div class="mb-6">
-        <label class="text-sm text-muted mb-3 block">Theme</label>
-        <div class="flex gap-3">
-          <button class="theme-btn flex-1 flex flex-col items-center gap-2 p-3 rounded-xl border-2 border-primary transition" data-theme="light">
-            <span class="theme-dot light"></span><span class="text-xs">Light</span>
-          </button>
-          <button class="theme-btn flex-1 flex flex-col items-center gap-2 p-3 rounded-xl border-2 transition" data-theme="dark">
-            <span class="theme-dot dark"></span><span class="text-xs">Dark</span>
-          </button>
-          <button class="theme-btn flex-1 flex flex-col items-center gap-2 p-3 rounded-xl border-2 transition" data-theme="sepia">
-            <span class="theme-dot sepia"></span><span class="text-xs">Sepia</span>
-          </button>
-        </div>
-      </div>
+<body>
+    <!-- Loading Screen -->
+    <div id="loading" class="loading-screen">
+        <div class="spinner"></div>
+        <p>Loading...</p>
     </div>
-  </div>
 
-  <script src="scripts/app.js"></script>
+    <!-- Main Container -->
+    <div id="app" class="hidden">
+        <!-- Header -->
+        <header id="header">
+            <button id="menuBtn" class="icon-btn" aria-label="Menu">☰</button>
+            <h1 id="headerTitle">Book</h1>
+            <button id="settingsBtn" class="icon-btn" aria-label="Settings">⚙</button>
+        </header>
+
+        <!-- Sidebar (Table of Contents) -->
+        <nav id="sidebar" class="sidebar hidden">
+            <div class="sidebar-header">
+                <h2>Contents</h2>
+                <button id="closeSidebar" class="icon-btn">×</button>
+            </div>
+            <ul id="tocList" class="toc-list"></ul>
+        </nav>
+
+        <!-- Overlay -->
+        <div id="overlay" class="overlay hidden"></div>
+
+        <!-- Content Area -->
+        <main id="content">
+            <!-- Cover Page -->
+            <section id="coverPage" class="page cover-page">
+                <div class="cover-content">
+                    <img id="coverImage" src="" alt="Cover" class="hidden">
+                    <h1 id="bookTitle">Book Title</h1>
+                    <p id="bookAuthor" class="author">by Author Name</p>
+                    <p id="dedication" class="dedication hidden"></p>
+                </div>
+                <button id="startReading" class="btn-primary">Start Reading</button>
+            </section>
+
+            <!-- Chapter Pages (dynamically added) -->
+            <div id="chapters"></div>
+        </main>
+
+        <!-- Navigation -->
+        <footer id="navigation">
+            <button id="prevBtn" class="nav-btn" disabled>← Previous</button>
+            <span id="pageIndicator">1 / 1</span>
+            <button id="nextBtn" class="nav-btn">Next →</button>
+        </footer>
+
+        <!-- Settings Panel -->
+        <div id="settingsPanel" class="settings-panel hidden">
+            <div class="settings-header">
+                <h2>Settings</h2>
+                <button id="closeSettings" class="icon-btn">×</button>
+            </div>
+            <div class="setting-group">
+                <label>Font Size</label>
+                <div class="font-size-controls">
+                    <button id="fontSmaller">A-</button>
+                    <span id="fontSizeDisplay">16px</span>
+                    <button id="fontLarger">A+</button>
+                </div>
+            </div>
+            <div class="setting-group">
+                <label>Theme</label>
+                <div class="theme-options">
+                    <button id="themeLight" class="theme-btn active" data-theme="light">Light</button>
+                    <button id="themeDark" class="theme-btn" data-theme="dark">Dark</button>
+                    <button id="themeSepia" class="theme-btn" data-theme="sepia">Sepia</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="scripts/app.js"></script>
 </body>
 </html>
+

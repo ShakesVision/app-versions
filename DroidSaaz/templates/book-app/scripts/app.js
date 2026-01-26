@@ -1,206 +1,297 @@
-// Book App - Minimal JS
+// Book App JavaScript
+// Reads content.json and config.json to render the book
+
 (function() {
-  'use strict';
+    'use strict';
 
-  let data = null, config = null, page = 0, fontSize = 16;
-  const $ = id => document.getElementById(id);
-  const $$ = sel => document.querySelectorAll(sel);
+    // State
+    let bookData = null;
+    let configData = null;
+    let currentPage = 0; // 0 = cover, 1+ = chapters
+    let fontSize = 16;
 
-  document.addEventListener('DOMContentLoaded', init);
+    // DOM Elements
+    const elements = {};
 
-  async function init() {
-    try {
-      const [contentRes, configRes] = await Promise.all([
-        fetch('content.json').catch(() => null),
-        fetch('config.json').catch(() => null)
-      ]);
-      
-      data = contentRes?.ok ? await contentRes.json() : {
-        title: 'Sample Book', author: 'Author', chapters: [
-          { id: 1, title: 'Chapter 1', content: '<p>Welcome to this book!</p>' }
-        ]
-      };
-      
-      config = configRes?.ok ? await configRes.json() : {
-        theme: { primaryColor: '#2196F3', backgroundColor: '#FAFAFA', textColor: '#212121' },
-        fonts: { heading: 'Roboto', body: 'Merriweather' }, direction: 'ltr'
-      };
-      
-      applyConfig();
-      render();
-      bindEvents();
-      $('loading').classList.add('hidden');
-      $('app').classList.remove('hidden');
-    } catch (e) {
-      console.error('Init error:', e);
-    }
-  }
+    // Initialize
+    document.addEventListener('DOMContentLoaded', init);
 
-  function applyConfig() {
-    const r = document.documentElement.style;
-    const t = config.theme || {};
-    if (t.primaryColor) r.setProperty('--c-primary', t.primaryColor);
-    if (t.backgroundColor) r.setProperty('--c-bg', t.backgroundColor);
-    if (t.textColor) r.setProperty('--c-text', t.textColor);
-    if (t.accentColor) r.setProperty('--c-accent', t.accentColor);
-    
-    const f = config.fonts || {};
-    if (f.heading) r.setProperty('--font-heading', `'${f.heading}', sans-serif`);
-    if (f.body) r.setProperty('--font-body', `'${f.body}', serif`);
-    
-    const dir = config.direction || data?.direction || 'ltr';
-    document.body.setAttribute('dir', dir === 'auto' ? 'ltr' : dir);
-  }
-
-  function render() {
-    // Cover
-    $('bookTitle').textContent = data.title || 'Untitled';
-    $('headerTitle').textContent = data.title || 'Book';
-    $('bookAuthor').textContent = data.author ? `by ${data.author}` : '';
-    
-    if (data.cover) {
-      $('coverImage').src = data.cover;
-      $('coverImage').classList.remove('hidden');
-    }
-    if (data.fields?.dedication || data.dedication) {
-      $('dedication').textContent = data.fields?.dedication || data.dedication;
-      $('dedication').classList.remove('hidden');
+    async function init() {
+        cacheElements();
+        await loadData();
+        applyConfig();
+        renderBook();
+        setupEventListeners();
+        hideLoading();
     }
 
-    // TOC
-    const toc = $('tocList');
-    toc.innerHTML = '<li class="px-5 py-3 border-b cursor-pointer transition hover:bg-black/50 active" data-page="0">Cover</li>';
-    
-    // Chapters
-    const chapters = $('chapters');
-    chapters.innerHTML = '';
-    
-    (data.chapters || []).forEach((ch, i) => {
-      // TOC item
-      const li = document.createElement('li');
-      li.className = 'px-5 py-3 border-b cursor-pointer transition hover:bg-black/50';
-      li.textContent = ch.title || `Chapter ${i + 1}`;
-      li.dataset.page = i + 1;
-      li.onclick = () => goTo(i + 1);
-      toc.appendChild(li);
-      
-      // Chapter section
-      const sec = document.createElement('section');
-      sec.className = 'chapter hidden animate-fadeIn py-6';
-      sec.id = `ch-${ch.id || i}`;
-      
-      const dir = ch.direction === 'inherit' ? (config?.direction || 'ltr') : (ch.direction || 'ltr');
-      sec.setAttribute('dir', dir === 'auto' ? 'ltr' : dir);
-      
-      sec.innerHTML = `
-        <h2 class="text-2xl font-bold text-primary mb-6 pb-3 border-b-2 border-primary">${ch.title || 'Chapter ' + (i + 1)}</h2>
-        <div class="chapter-content">${ch.content || ''}</div>
-      `;
-      chapters.appendChild(sec);
-    });
-
-    toc.querySelector('[data-page="0"]').onclick = () => goTo(0);
-    updateNav();
-  }
-
-  function bindEvents() {
-    // Menu
-    $('menuBtn').onclick = () => toggleSidebar(true);
-    $('closeSidebar').onclick = () => toggleSidebar(false);
-    $('overlay').onclick = () => { toggleSidebar(false); toggleSettings(false); };
-    
-    // Navigation
-    $('startBtn').onclick = () => goTo(1);
-    $('prevBtn').onclick = () => goTo(page - 1);
-    $('nextBtn').onclick = () => goTo(page + 1);
-    
-    // Settings
-    $('settingsBtn').onclick = () => toggleSettings(true);
-    $('closeSettings').onclick = () => toggleSettings(false);
-    
-    // Font size
-    $('fontDown').onclick = () => setFontSize(-2);
-    $('fontUp').onclick = () => setFontSize(2);
-    
-    // Theme
-    $$('.theme-btn').forEach(btn => {
-      btn.onclick = () => setTheme(btn.dataset.theme);
-    });
-  }
-
-  function toggleSidebar(open) {
-    const sb = $('sidebar'), ov = $('overlay');
-    if (open) {
-      sb.classList.remove('-translate-x-full');
-      sb.classList.add('translate-x-0');
-      ov.classList.remove('hidden', 'opacity-0');
-    } else {
-      sb.classList.add('-translate-x-full');
-      sb.classList.remove('translate-x-0');
-      ov.classList.add('opacity-0');
-      setTimeout(() => ov.classList.add('hidden'), 300);
+    function cacheElements() {
+        elements.loading = document.getElementById('loading');
+        elements.app = document.getElementById('app');
+        elements.headerTitle = document.getElementById('headerTitle');
+        elements.menuBtn = document.getElementById('menuBtn');
+        elements.settingsBtn = document.getElementById('settingsBtn');
+        elements.sidebar = document.getElementById('sidebar');
+        elements.closeSidebar = document.getElementById('closeSidebar');
+        elements.overlay = document.getElementById('overlay');
+        elements.tocList = document.getElementById('tocList');
+        elements.coverPage = document.getElementById('coverPage');
+        elements.coverImage = document.getElementById('coverImage');
+        elements.bookTitle = document.getElementById('bookTitle');
+        elements.bookAuthor = document.getElementById('bookAuthor');
+        elements.dedication = document.getElementById('dedication');
+        elements.startReading = document.getElementById('startReading');
+        elements.chapters = document.getElementById('chapters');
+        elements.prevBtn = document.getElementById('prevBtn');
+        elements.nextBtn = document.getElementById('nextBtn');
+        elements.pageIndicator = document.getElementById('pageIndicator');
+        elements.settingsPanel = document.getElementById('settingsPanel');
+        elements.closeSettings = document.getElementById('closeSettings');
+        elements.fontSmaller = document.getElementById('fontSmaller');
+        elements.fontLarger = document.getElementById('fontLarger');
+        elements.fontSizeDisplay = document.getElementById('fontSizeDisplay');
     }
-  }
 
-  function toggleSettings(open) {
-    const sp = $('settingsPanel'), ov = $('overlay');
-    if (open) {
-      sp.classList.remove('hidden', 'translate-y-full');
-      sp.classList.add('translate-y-0');
-      ov.classList.remove('hidden', 'opacity-0');
-    } else {
-      sp.classList.add('translate-y-full');
-      sp.classList.remove('translate-y-0');
-      setTimeout(() => sp.classList.add('hidden'), 300);
-      ov.classList.add('opacity-0');
-      setTimeout(() => ov.classList.add('hidden'), 300);
+    async function loadData() {
+        try {
+            // Load content
+            const contentResponse = await fetch('content.json');
+            if (contentResponse.ok) {
+                bookData = await contentResponse.json();
+            } else {
+                // Demo content for testing
+                bookData = {
+                    title: 'Sample Book',
+                    author: 'Author Name',
+                    direction: 'ltr',
+                    chapters: [
+                        { id: 1, title: 'Introduction', content: '<p>Welcome to this book!</p>', direction: 'inherit' }
+                    ]
+                };
+            }
+
+            // Load config
+            const configResponse = await fetch('config.json');
+            if (configResponse.ok) {
+                configData = await configResponse.json();
+            } else {
+                // Default config
+                configData = {
+                    theme: {
+                        primaryColor: '#2196F3',
+                        backgroundColor: '#FAFAFA',
+                        textColor: '#212121',
+                        accentColor: '#FF5722'
+                    },
+                    fonts: {
+                        heading: 'Roboto',
+                        body: 'Merriweather'
+                    },
+                    direction: 'ltr'
+                };
+            }
+        } catch (error) {
+            console.error('Error loading data:', error);
+        }
     }
-  }
 
-  function goTo(p) {
-    const total = 1 + (data?.chapters?.length || 0);
-    if (p < 0 || p >= total) return;
-    page = p;
-    
-    // Hide all, show current
-    $$('.chapter').forEach(el => el.classList.add('hidden'));
-    if (p === 0) {
-      $('coverPage').classList.remove('hidden');
-    } else {
-      $('coverPage').classList.add('hidden');
-      const ch = data.chapters[p - 1];
-      const el = $(`ch-${ch.id || p - 1}`);
-      if (el) el.classList.remove('hidden');
+    function applyConfig() {
+        if (!configData) return;
+
+        const root = document.documentElement;
+        const theme = configData.theme;
+        const fonts = configData.fonts;
+
+        // Apply colors
+        if (theme) {
+            root.style.setProperty('--primary-color', theme.primaryColor);
+            root.style.setProperty('--background-color', theme.backgroundColor);
+            root.style.setProperty('--text-color', theme.textColor);
+            root.style.setProperty('--accent-color', theme.accentColor);
+        }
+
+        // Apply fonts
+        if (fonts) {
+            root.style.setProperty('--heading-font', `'${fonts.heading}', sans-serif`);
+            root.style.setProperty('--body-font', `'${fonts.body}', serif`);
+        }
+
+        // Apply direction
+        const direction = configData.direction || bookData?.direction || 'ltr';
+        document.body.setAttribute('dir', direction === 'auto' ? 'ltr' : direction);
     }
-    
-    // Update TOC active
-    $$('#tocList li').forEach((li, i) => {
-      li.classList.toggle('active', i === p);
-    });
-    
-    updateNav();
-    toggleSidebar(false);
-    window.scrollTo(0, 0);
-  }
 
-  function updateNav() {
-    const total = 1 + (data?.chapters?.length || 0);
-    $('prevBtn').disabled = page === 0;
-    $('nextBtn').disabled = page >= total - 1;
-    $('pageNum').textContent = `${page + 1} / ${total}`;
-  }
+    function renderBook() {
+        if (!bookData) return;
 
-  function setFontSize(delta) {
-    fontSize = Math.max(12, Math.min(24, fontSize + delta));
-    document.documentElement.style.setProperty('--text-size', fontSize + 'px');
-    $('fontSize').textContent = fontSize + 'px';
-  }
+        // Cover
+        elements.bookTitle.textContent = bookData.title || 'Untitled';
+        elements.headerTitle.textContent = bookData.title || 'Book';
+        elements.bookAuthor.textContent = bookData.author ? `by ${bookData.author}` : '';
 
-  function setTheme(theme) {
-    document.body.dataset.theme = theme;
-    $$('.theme-btn').forEach(btn => {
-      btn.classList.toggle('border-primary', btn.dataset.theme === theme);
-    });
-  }
+        if (bookData.cover) {
+            elements.coverImage.src = bookData.cover;
+            elements.coverImage.classList.remove('hidden');
+        }
+
+        if (bookData.fields?.dedication) {
+            elements.dedication.textContent = bookData.fields.dedication;
+            elements.dedication.classList.remove('hidden');
+        }
+
+        // Table of Contents
+        elements.tocList.innerHTML = '';
+        const coverLi = document.createElement('li');
+        coverLi.textContent = 'Cover';
+        coverLi.onclick = () => goToPage(0);
+        elements.tocList.appendChild(coverLi);
+
+        // Chapters
+        elements.chapters.innerHTML = '';
+        if (bookData.chapters) {
+            bookData.chapters.forEach((chapter, index) => {
+                // TOC entry
+                const li = document.createElement('li');
+                li.textContent = chapter.title || `Chapter ${index + 1}`;
+                li.onclick = () => goToPage(index + 1);
+                elements.tocList.appendChild(li);
+
+                // Chapter content
+                const section = document.createElement('section');
+                section.className = 'chapter page hidden';
+                section.id = `chapter-${chapter.id}`;
+
+                // Apply chapter direction if specified
+                const chapterDir = chapter.direction === 'inherit' ? 
+                    (configData?.direction || 'ltr') : 
+                    (chapter.direction || 'ltr');
+                section.setAttribute('dir', chapterDir === 'auto' ? 'ltr' : chapterDir);
+
+                section.innerHTML = `
+                    <h2>${chapter.title || 'Chapter ' + (index + 1)}</h2>
+                    <div class="chapter-content">${chapter.content}</div>
+                `;
+
+                elements.chapters.appendChild(section);
+            });
+        }
+
+        // Update navigation
+        updateNavigation();
+    }
+
+    function setupEventListeners() {
+        // Menu
+        elements.menuBtn.onclick = openSidebar;
+        elements.closeSidebar.onclick = closeSidebar;
+        elements.overlay.onclick = () => {
+            closeSidebar();
+            closeSettings();
+        };
+
+        // Navigation
+        elements.startReading.onclick = () => goToPage(1);
+        elements.prevBtn.onclick = () => goToPage(currentPage - 1);
+        elements.nextBtn.onclick = () => goToPage(currentPage + 1);
+
+        // Settings
+        elements.settingsBtn.onclick = openSettings;
+        elements.closeSettings.onclick = closeSettings;
+
+        // Font size
+        elements.fontSmaller.onclick = () => changeFontSize(-2);
+        elements.fontLarger.onclick = () => changeFontSize(2);
+
+        // Theme buttons
+        document.querySelectorAll('.theme-btn').forEach(btn => {
+            btn.onclick = () => setTheme(btn.dataset.theme);
+        });
+    }
+
+    function openSidebar() {
+        elements.sidebar.classList.add('open');
+        elements.sidebar.classList.remove('hidden');
+        elements.overlay.classList.add('open');
+        elements.overlay.classList.remove('hidden');
+    }
+
+    function closeSidebar() {
+        elements.sidebar.classList.remove('open');
+        elements.overlay.classList.remove('open');
+        setTimeout(() => {
+            elements.sidebar.classList.add('hidden');
+            elements.overlay.classList.add('hidden');
+        }, 300);
+    }
+
+    function openSettings() {
+        elements.settingsPanel.classList.add('open');
+        elements.settingsPanel.classList.remove('hidden');
+    }
+
+    function closeSettings() {
+        elements.settingsPanel.classList.remove('open');
+        setTimeout(() => {
+            elements.settingsPanel.classList.add('hidden');
+        }, 300);
+    }
+
+    function goToPage(page) {
+        const totalPages = 1 + (bookData?.chapters?.length || 0);
+        if (page < 0 || page >= totalPages) return;
+
+        currentPage = page;
+
+        // Hide all pages
+        document.querySelectorAll('.page').forEach(p => p.classList.add('hidden'));
+
+        // Show current page
+        if (page === 0) {
+            elements.coverPage.classList.remove('hidden');
+        } else {
+            const chapterId = bookData.chapters[page - 1].id;
+            const chapterEl = document.getElementById(`chapter-${chapterId}`);
+            if (chapterEl) chapterEl.classList.remove('hidden');
+        }
+
+        // Update TOC
+        const tocItems = elements.tocList.querySelectorAll('li');
+        tocItems.forEach((li, i) => {
+            li.classList.toggle('active', i === page);
+        });
+
+        // Update navigation
+        updateNavigation();
+        closeSidebar();
+
+        // Scroll to top
+        window.scrollTo(0, 0);
+    }
+
+    function updateNavigation() {
+        const totalPages = 1 + (bookData?.chapters?.length || 0);
+        
+        elements.prevBtn.disabled = currentPage === 0;
+        elements.nextBtn.disabled = currentPage >= totalPages - 1;
+        elements.pageIndicator.textContent = `${currentPage + 1} / ${totalPages}`;
+    }
+
+    function changeFontSize(delta) {
+        fontSize = Math.max(12, Math.min(24, fontSize + delta));
+        document.documentElement.style.setProperty('--font-size', fontSize + 'px');
+        elements.fontSizeDisplay.textContent = fontSize + 'px';
+    }
+
+    function setTheme(theme) {
+        document.body.setAttribute('data-theme', theme);
+        document.querySelectorAll('.theme-btn').forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.theme === theme);
+        });
+    }
+
+    function hideLoading() {
+        elements.loading.classList.add('hidden');
+        elements.app.classList.remove('hidden');
+    }
 })();
 
