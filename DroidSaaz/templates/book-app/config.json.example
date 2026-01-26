@@ -1,0 +1,14 @@
+{
+  "theme": {
+    "primaryColor": "#2196F3",
+    "backgroundColor": "#FAFAFA",
+    "textColor": "#212121",
+    "accentColor": "#FF5722"
+  },
+  "fonts": {
+    "heading": "Roboto",
+    "body": "Merriweather"
+  },
+  "direction": "ltr"
+}
+

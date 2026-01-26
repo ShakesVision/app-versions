@@ -2,6 +2,11 @@
   "id": "book-app-v1",
   "name": "Book App",
   "version": 1,
+  "description": {
+    "en": "Create a beautiful reading app with chapters, table of contents, and customizable themes",
+    "ar": "إنشاء تطبيق قراءة جميل مع فصول وفهرس محتويات وسمات قابلة للتخصيص",
+    "ur": "ابواب، فہرست مضامین، اور حسب پسند تھیمز کے ساتھ ایک خوبصورت ریڈنگ ایپ بنائیں"
+  },
   
   "fields": [
     {
@@ -21,10 +26,16 @@
     },
     {
       "id": "cover",
-      "type": "image",
+      "type": "imageUrl",
       "required": false,
       "labels": {"en": "Cover Image", "ar": "صورة الغلاف", "ur": "سرورق کی تصویر"},
-      "aspectRatio": "2:3"
+      "aspectRatio": "2:3",
+      "accept": "file,url,gdrive",
+      "hint": {
+        "en": "Upload a file, paste URL, or Google Drive link",
+        "ar": "ارفع ملف أو الصق رابط أو رابط جوجل درايف",
+        "ur": "فائل اپلوڈ کریں، URL چسپاں کریں، یا گوگل ڈرائیو لنک"
+      }
     },
     {
       "id": "dedication",
@@ -33,6 +44,14 @@
       "labels": {"en": "Dedication", "ar": "إهداء", "ur": "انتساب"},
       "placeholder": {"en": "Optional dedication text", "ar": "نص الإهداء (اختياري)", "ur": "انتساب کا متن (اختیاری)"},
       "maxLength": 500
+    },
+    {
+      "id": "description",
+      "type": "textarea",
+      "required": false,
+      "labels": {"en": "Book Description", "ar": "وصف الكتاب", "ur": "کتاب کا تعارف"},
+      "placeholder": {"en": "Brief description for the about page", "ar": "وصف موجز لصفحة النبذة", "ur": "تعارف صفحے کے لیے مختصر بیان"},
+      "maxLength": 1000
     }
   ],
   
@@ -41,10 +60,27 @@
     "minCount": 1,
     "maxCount": 100,
     "labels": {"en": "Chapter", "ar": "فصل", "ur": "باب"},
+    "addLabel": {"en": "Add Chapter", "ar": "إضافة فصل", "ur": "باب شامل کریں"},
     "fields": [
-      {"id": "title", "type": "text", "required": true, "labels": {"en": "Chapter Title", "ar": "عنوان الفصل", "ur": "باب کا عنوان"}},
-      {"id": "content", "type": "markdown", "required": true, "labels": {"en": "Content", "ar": "المحتوى", "ur": "مواد"}},
-      {"id": "direction", "type": "direction", "required": false, "default": "inherit", "labels": {"en": "Text Direction", "ar": "اتجاه النص", "ur": "متن کی سمت"}}
+      {
+        "id": "title",
+        "type": "text",
+        "required": true,
+        "labels": {"en": "Chapter Title", "ar": "عنوان الفصل", "ur": "باب کا عنوان"}
+      },
+      {
+        "id": "content",
+        "type": "markdown",
+        "required": true,
+        "labels": {"en": "Content", "ar": "المحتوى", "ur": "مواد"}
+      },
+      {
+        "id": "direction",
+        "type": "direction",
+        "required": false,
+        "default": "inherit",
+        "labels": {"en": "Text Direction", "ar": "اتجاه النص", "ur": "متن کی سمت"}
+      }
     ]
   },
   
@@ -58,12 +94,12 @@
     "fonts": {
       "heading": {
         "labels": {"en": "Heading Font", "ar": "خط العنوان", "ur": "سرخی کا فونٹ"},
-        "options": ["Roboto", "Open Sans", "Lora", "Amiri", "Noto Nastaliq Urdu", "Cairo"],
+        "options": ["Roboto", "Open Sans", "Lora", "Amiri", "Noto Nastaliq Urdu", "Cairo", "Playfair Display", "Merriweather"],
         "default": "Roboto"
       },
       "body": {
         "labels": {"en": "Body Font", "ar": "خط النص", "ur": "متن کا فونٹ"},
-        "options": ["Roboto", "Open Sans", "Merriweather", "Amiri", "Noto Nastaliq Urdu", "Cairo"],
+        "options": ["Roboto", "Open Sans", "Merriweather", "Amiri", "Noto Nastaliq Urdu", "Cairo", "Georgia", "Lora"],
         "default": "Merriweather"
       }
     },

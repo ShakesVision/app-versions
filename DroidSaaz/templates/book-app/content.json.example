@@ -1,0 +1,25 @@
+{
+  "title": "My Book Title",
+  "author": "Author Name",
+  "cover": "",
+  "dedication": "To all the readers...",
+  "fields": {
+    "description": "A brief description of this book."
+  },
+  "direction": "ltr",
+  "chapters": [
+    {
+      "id": 1,
+      "title": "Introduction",
+      "content": "<p>Welcome to this book! This is the first chapter.</p><p>You can write in <strong>Markdown</strong> or <em>HTML</em>.</p>",
+      "direction": "inherit"
+    },
+    {
+      "id": 2,
+      "title": "Getting Started",
+      "content": "<h3>Section 1</h3><p>This is the content of chapter 2.</p><blockquote>A wise quote here.</blockquote><p>More content follows...</p>",
+      "direction": "inherit"
+    }
+  ]
+}
+
