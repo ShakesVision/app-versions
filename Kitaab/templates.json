@@ -1,0 +1,533 @@
+{
+  "version": "1.1.0",
+  "lastUpdated": "2026-01-30T00:00:00Z",
+  "tags": [
+    "editors-choice",
+    "new-arrival",
+    "classic",
+    "contemporary",
+    "bestseller",
+    "children",
+    "sufi",
+    "romantic"
+  ],
+  "categories": [
+    {
+      "id": "dawawin",
+      "name": { "en": "Dawāwīn", "ur": "دواوین", "fa": "دیوان‌ها", "ar": "الدواوين" },
+      "icon": "book-open",
+      "priority": 1
+    },
+    {
+      "id": "classical",
+      "name": {
+        "en": "Classical Poetry",
+        "ur": "کلاسیکی شاعری",
+        "fa": "شعر کلاسیک",
+        "ar": "الشعر الكلاسيكي"
+      },
+      "icon": "star",
+      "priority": 2
+    },
+    {
+      "id": "modern",
+      "name": { "en": "Modern Poetry", "ur": "جدید شاعری", "fa": "شعر مدرن", "ar": "الشعر الحديث" },
+      "icon": "sparkles",
+      "priority": 3
+    },
+    {
+      "id": "ghazal",
+      "name": { "en": "Ghazal", "ur": "غزل", "fa": "غزل", "ar": "الغزل" },
+      "icon": "heart",
+      "priority": 4
+    },
+    {
+      "id": "nazm",
+      "name": { "en": "Nazm", "ur": "نظم", "fa": "نظم", "ar": "النظم" },
+      "icon": "document-text",
+      "priority": 5
+    },
+    {
+      "id": "prose",
+      "name": { "en": "Prose", "ur": "نثر", "fa": "نثر", "ar": "النثر" },
+      "icon": "reader",
+      "priority": 6
+    },
+    {
+      "id": "sufi",
+      "name": { "en": "Sufi Poetry", "ur": "صوفی شاعری", "fa": "شعر صوفی", "ar": "الشعر الصوفي" },
+      "icon": "flame",
+      "priority": 7
+    },
+    {
+      "id": "children",
+      "name": {
+        "en": "Children's Books",
+        "ur": "بچوں کی کتابیں",
+        "fa": "کتاب‌های کودکان",
+        "ar": "كتب الأطفال"
+      },
+      "icon": "happy",
+      "priority": 8
+    }
+  ],
+  "languages": [
+    {
+      "code": "ur",
+      "name": "اردو",
+      "direction": "rtl",
+      "defaultFont": "jameel-noori-nastaliq"
+    },
+    {
+      "code": "fa",
+      "name": "فارسی",
+      "direction": "rtl",
+      "defaultFont": "vazirmatn"
+    },
+    {
+      "code": "ar",
+      "name": "العربية",
+      "direction": "rtl",
+      "defaultFont": "amiri"
+    },
+    {
+      "code": "pnb",
+      "name": "پنجابی",
+      "direction": "rtl",
+      "defaultFont": "jameel-noori-nastaliq"
+    }
+  ],
+  "ui": {
+    "hero": {
+      "type": "banner-carousel",
+      "autoPlayInterval": 5000,
+      "banners": [
+        {
+          "id": "banner-ghalib",
+          "imageUrl": "banners/ghalib-banner.jpg",
+          "title": {
+            "ur": "دیوان غالب",
+            "en": "Diwan-e-Ghalib",
+            "fa": "دیوان غالب",
+            "ar": "ديوان غالب"
+          },
+          "subtitle": { "ur": "اردو شاعری کا شاہکار", "en": "Masterpiece of Urdu Poetry" },
+          "action": { "type": "book", "bookId": "ghalib-diwan-e-ghalib" },
+          "backgroundColor": "#1a1a2e",
+          "textColor": "#eee8d5",
+          "priority": 1
+        },
+        {
+          "id": "banner-iqbal",
+          "imageUrl": "banners/iqbal-banner.jpg",
+          "title": { "ur": "کلام اقبال", "en": "Poetry of Iqbal" },
+          "subtitle": { "ur": "شاعر مشرق", "en": "Poet of the East" },
+          "action": { "type": "search", "query": "poetId:iqbal" },
+          "backgroundColor": "#0d3b66",
+          "textColor": "#faf0ca",
+          "priority": 2
+        }
+      ]
+    },
+    "sections": [
+      {
+        "id": "continue-reading",
+        "type": "continue-reading",
+        "title": {
+          "ur": "پڑھنا جاری رکھیں",
+          "en": "Continue Reading",
+          "fa": "ادامه مطالعه",
+          "ar": "مواصلة القراءة"
+        },
+        "showSeeAll": false,
+        "priority": 1,
+        "style": {
+          "showProgress": true,
+          "cardSize": "large"
+        }
+      },
+      {
+        "id": "editors-choice",
+        "type": "horizontal-scroll",
+        "title": {
+          "ur": "ایڈیٹر کی پسند",
+          "en": "Editor's Choice",
+          "fa": "انتخاب سردبیر",
+          "ar": "اختيار المحرر"
+        },
+        "filter": { "tags": ["editors-choice"] },
+        "showSeeAll": true,
+        "limit": 10,
+        "priority": 2,
+        "style": {
+          "cardSize": "medium",
+          "showAuthor": true
+        }
+      },
+      {
+        "id": "new-arrivals",
+        "type": "horizontal-scroll",
+        "title": { "ur": "نئی آمد", "en": "New Arrivals", "fa": "تازه‌ها", "ar": "وصل حديثاً" },
+        "filter": { "tags": ["new-arrival"] },
+        "showSeeAll": true,
+        "limit": 8,
+        "priority": 3
+      },
+      {
+        "id": "dawawin-section",
+        "type": "horizontal-scroll",
+        "title": {
+          "ur": "دواوین",
+          "en": "Dawāwīn (Poetry Collections)",
+          "fa": "دیوان‌ها",
+          "ar": "الدواوين"
+        },
+        "subtitle": { "ur": "مشہور شعرا کے کلام", "en": "Poetry from renowned poets" },
+        "filter": { "categories": ["dawawin"] },
+        "showSeeAll": true,
+        "seeAllRoute": "/catalog?category=dawawin",
+        "limit": 10,
+        "priority": 4
+      },
+      {
+        "id": "by-language",
+        "type": "language-tabs",
+        "title": {
+          "ur": "زبان کے مطابق",
+          "en": "Browse by Language",
+          "fa": "بر اساس زبان",
+          "ar": "حسب اللغة"
+        },
+        "tabs": [
+          {
+            "language": "ur",
+            "label": { "ur": "اردو", "en": "Urdu", "fa": "اردو", "ar": "الأردية" }
+          },
+          {
+            "language": "fa",
+            "label": { "ur": "فارسی", "en": "Farsi", "fa": "فارسی", "ar": "الفارسية" }
+          },
+          {
+            "language": "ar",
+            "label": { "ur": "عربی", "en": "Arabic", "fa": "عربی", "ar": "العربية" }
+          },
+          {
+            "language": "pnb",
+            "label": { "ur": "پنجابی", "en": "Punjabi", "fa": "پنجابی", "ar": "البنجابية" }
+          }
+        ],
+        "showSeeAll": true,
+        "limit": 6,
+        "priority": 5
+      },
+      {
+        "id": "sufi-poetry",
+        "type": "horizontal-scroll",
+        "title": {
+          "ur": "صوفی شاعری",
+          "en": "Sufi Poetry",
+          "fa": "شعر صوفی",
+          "ar": "الشعر الصوفي"
+        },
+        "filter": { "categories": ["sufi"] },
+        "showSeeAll": true,
+        "limit": 8,
+        "priority": 6,
+        "style": {
+          "backgroundColor": "#2d1b4e",
+          "textColor": "#e8dff5"
+        }
+      },
+      {
+        "id": "children-books",
+        "type": "grid",
+        "title": {
+          "ur": "بچوں کی کتابیں",
+          "en": "Children's Books",
+          "fa": "کتاب‌های کودکان",
+          "ar": "كتب الأطفال"
+        },
+        "filter": { "categories": ["children"] },
+        "showSeeAll": true,
+        "limit": 6,
+        "priority": 7,
+        "style": {
+          "cardSize": "small",
+          "backgroundColor": "#fff5e6"
+        }
+      },
+      {
+        "id": "downloaded",
+        "type": "downloaded",
+        "title": {
+          "ur": "ڈاؤن لوڈ شدہ کتابیں",
+          "en": "My Downloads",
+          "fa": "دانلود شده‌ها",
+          "ar": "التحميلات"
+        },
+        "showSeeAll": true,
+        "priority": 8,
+        "style": {
+          "showProgress": true
+        }
+      }
+    ]
+  },
+  "books": [
+    {
+      "id": "ghalib-diwan-e-ghalib",
+      "title": {
+        "en": "Diwan-e-Nasir",
+        "ur": "دیوانِ ناصر",
+        "fa": "دیوانِ ناصر",
+        "ar": "دیوانِ ناصر"
+      },
+      "author": { "en": "Nasir Kazmi", "ur": "ناصر کاضمی" },
+      "language": "ur",
+      "categories": ["dawawin", "classical", "ghazal"],
+      "tags": ["editors-choice", "classic", "bestseller"],
+      "coverUrl": "books/nasir-deewan-e-nasir/cover.png",
+      "epubUrl": "books/nasir-deewan-e-nasir/DeewanNasir.epub",
+      "size": 2500000,
+      "featured": true,
+      "addedAt": "2026-01-31",
+      "description": {
+        "ur": "ناصر کاضمی کا مشہور دیوان جس میں ان کی غزلیات شامل ہیں۔",
+        "en": "The famous Diwan of Nasir Kazmi."
+      },
+      "poetId": "nasir"
+    },
+    {
+      "id": "ghalib-diwan-e-ghalib",
+      "title": {
+        "en": "Diwan-e-Ghalib",
+        "ur": "دیوان غالب",
+        "fa": "دیوان غالب",
+        "ar": "ديوان غالب"
+      },
+      "author": { "en": "Mirza Ghalib", "ur": "مرزا غالب" },
+      "language": "ur",
+      "categories": ["dawawin", "classical", "ghazal"],
+      "tags": ["editors-choice", "classic", "bestseller"],
+      "coverUrl": "books/ghalib-diwan-e-ghalib/cover.jpg",
+      "epubUrl": "books/ghalib-diwan-e-ghalib/book.epub",
+      "size": 2500000,
+      "featured": true,
+      "addedAt": "2025-01-01",
+      "description": {
+        "ur": "مرزا اسد اللہ خان غالب کا مشہور دیوان جس میں ان کی غزلیات شامل ہیں۔",
+        "en": "The famous Diwan of Mirza Asadullah Khan Ghalib containing his ghazals."
+      },
+      "poetId": "ghalib"
+    },
+    {
+      "id": "iqbal-bang-e-dara",
+      "title": { "en": "Bang-e-Dara", "ur": "بانگ درا" },
+      "author": { "en": "Allama Iqbal", "ur": "علامہ اقبال" },
+      "language": "ur",
+      "categories": ["dawawin", "modern", "nazm"],
+      "tags": ["editors-choice", "new-arrival"],
+      "coverUrl": "books/iqbal-bang-e-dara/cover.jpg",
+      "epubUrl": "books/iqbal-bang-e-dara/book.epub",
+      "size": 3200000,
+      "featured": true,
+      "addedAt": "2026-01-15",
+      "description": {
+        "ur": "علامہ محمد اقبال کا پہلا اردو شعری مجموعہ۔",
+        "en": "The first Urdu poetry collection of Allama Muhammad Iqbal."
+      },
+      "poetId": "iqbal"
+    },
+    {
+      "id": "mir-kulliyat-e-mir",
+      "title": { "en": "Kulliyat-e-Mir", "ur": "کلیات میر" },
+      "author": { "en": "Mir Taqi Mir", "ur": "میر تقی میر" },
+      "language": "ur",
+      "categories": ["dawawin", "classical", "ghazal"],
+      "tags": ["classic"],
+      "coverUrl": "books/mir-kulliyat-e-mir/cover.jpg",
+      "epubUrl": "books/mir-kulliyat-e-mir/book.epub",
+      "size": 4100000,
+      "featured": false,
+      "addedAt": "2025-06-01",
+      "description": {
+        "ur": "خدائے سخن میر تقی میر کی مکمل غزلیات۔",
+        "en": "Complete collection of ghazals by the God of Poetry, Mir Taqi Mir."
+      },
+      "poetId": "mir"
+    },
+    {
+      "id": "iqbal-bal-e-jibreel",
+      "title": { "en": "Bal-e-Jibreel", "ur": "بال جبریل" },
+      "author": { "en": "Allama Iqbal", "ur": "علامہ اقبال" },
+      "language": "ur",
+      "categories": ["dawawin", "modern", "ghazal", "nazm"],
+      "tags": ["editors-choice"],
+      "coverUrl": "books/iqbal-bal-e-jibreel/cover.jpg",
+      "epubUrl": "books/iqbal-bal-e-jibreel/book.epub",
+      "size": 2800000,
+      "featured": true,
+      "addedAt": "2025-09-01",
+      "description": {
+        "ur": "علامہ اقبال کا اردو میں دوسرا شعری مجموعہ۔",
+        "en": "Iqbal's second Urdu poetry collection."
+      },
+      "poetId": "iqbal"
+    },
+    {
+      "id": "rumi-masnavi",
+      "title": { "en": "Masnavi-e-Manavi", "ur": "مثنوی معنوی", "fa": "مثنوی معنوی" },
+      "author": { "en": "Maulana Rumi", "ur": "مولانا رومی", "fa": "مولانا جلال‌الدین رومی" },
+      "language": "fa",
+      "categories": ["dawawin", "classical", "sufi"],
+      "tags": ["editors-choice", "classic", "sufi"],
+      "coverUrl": "books/rumi-masnavi/cover.jpg",
+      "epubUrl": "books/rumi-masnavi/book.epub",
+      "size": 5200000,
+      "featured": true,
+      "addedAt": "2025-03-01",
+      "description": {
+        "ur": "مولانا جلال الدین رومی کی شہرہ آفاق مثنوی۔",
+        "en": "The world-famous Masnavi of Maulana Jalaluddin Rumi.",
+        "fa": "مثنوی معنوی اثر جاودانه مولانا"
+      },
+      "poetId": "rumi"
+    },
+    {
+      "id": "waris-shah-heer",
+      "title": { "en": "Heer Waris Shah", "ur": "ہیر وارث شاہ", "pnb": "ہیر وارث شاہ" },
+      "author": { "en": "Waris Shah", "ur": "وارث شاہ", "pnb": "وارث شاہ" },
+      "language": "pnb",
+      "categories": ["dawawin", "classical", "sufi", "romantic"],
+      "tags": ["classic", "romantic"],
+      "coverUrl": "books/waris-shah-heer/cover.jpg",
+      "epubUrl": "books/waris-shah-heer/book.epub",
+      "size": 1800000,
+      "featured": false,
+      "addedAt": "2025-04-01",
+      "description": {
+        "ur": "پنجابی کا عظیم صوفی عشقیہ قصہ۔",
+        "en": "The great Punjabi Sufi romantic epic."
+      },
+      "poetId": "waris-shah"
+    },
+    {
+      "id": "hafiz-divan",
+      "title": {
+        "en": "Divan-e-Hafiz",
+        "ur": "دیوان حافظ",
+        "fa": "دیوان حافظ",
+        "ar": "ديوان حافظ"
+      },
+      "author": { "en": "Hafiz Shirazi", "ur": "حافظ شیرازی", "fa": "حافظ شیرازی" },
+      "language": "fa",
+      "categories": ["dawawin", "classical", "ghazal", "sufi"],
+      "tags": ["editors-choice", "classic", "sufi"],
+      "coverUrl": "books/hafiz-divan/cover.jpg",
+      "epubUrl": "books/hafiz-divan/book.epub",
+      "size": 3500000,
+      "featured": true,
+      "addedAt": "2026-01-20",
+      "description": {
+        "fa": "دیوان اشعار خواجه شمس‌الدین محمد حافظ شیرازی",
+        "ur": "حافظ شیرازی کا مشہور دیوان۔",
+        "en": "The famous Divan of Hafiz Shirazi."
+      },
+      "poetId": "hafiz"
+    },
+    {
+      "id": "mutanabbi-diwan",
+      "title": { "en": "Diwan al-Mutanabbi", "ar": "ديوان المتنبي", "ur": "دیوان المتنبی" },
+      "author": { "en": "Al-Mutanabbi", "ar": "أبو الطيب المتنبي", "ur": "ابو الطیب المتنبی" },
+      "language": "ar",
+      "categories": ["dawawin", "classical"],
+      "tags": ["classic"],
+      "coverUrl": "books/mutanabbi-diwan/cover.jpg",
+      "epubUrl": "books/mutanabbi-diwan/book.epub",
+      "size": 2900000,
+      "featured": false,
+      "addedAt": "2025-08-01",
+      "description": {
+        "ar": "ديوان أبي الطيب المتنبي، أعظم شعراء العرب",
+        "ur": "عرب کے عظیم شاعر المتنبی کا دیوان۔",
+        "en": "The Diwan of Al-Mutanabbi, one of the greatest Arab poets."
+      },
+      "poetId": "mutanabbi"
+    }
+  ],
+  "poets": [
+    {
+      "id": "ghalib",
+      "name": { "en": "Mirza Ghalib", "ur": "مرزا غالب" },
+      "birthYear": 1797,
+      "deathYear": 1869,
+      "era": "classical",
+      "bio": {
+        "ur": "مرزا اسد اللہ خان غالب اردو اور فارسی کے عظیم ترین شاعروں میں سے ایک تھے۔"
+      }
+    },
+    {
+      "id": "iqbal",
+      "name": { "en": "Allama Iqbal", "ur": "علامہ اقبال" },
+      "birthYear": 1877,
+      "deathYear": 1938,
+      "era": "modern",
+      "bio": {
+        "ur": "علامہ محمد اقبال پاکستان کے قومی شاعر اور مفکر تھے۔"
+      }
+    },
+    {
+      "id": "mir",
+      "name": { "en": "Mir Taqi Mir", "ur": "میر تقی میر" },
+      "birthYear": 1723,
+      "deathYear": 1810,
+      "era": "classical",
+      "bio": {
+        "ur": "میر تقی میر کو خدائے سخن کہا جاتا ہے۔ وہ اردو غزل کے بانیوں میں سے ہیں۔"
+      }
+    },
+    {
+      "id": "rumi",
+      "name": { "en": "Maulana Rumi", "ur": "مولانا رومی", "fa": "مولانا جلال‌الدین رومی" },
+      "birthYear": 1207,
+      "deathYear": 1273,
+      "era": "classical",
+      "bio": {
+        "ur": "مولانا جلال الدین رومی فارسی کے عظیم صوفی شاعر تھے۔",
+        "fa": "مولانا جلال‌الدین محمد بلخی معروف به مولوی و مولانا"
+      }
+    },
+    {
+      "id": "waris-shah",
+      "name": { "en": "Waris Shah", "ur": "وارث شاہ", "pnb": "وارث شاہ" },
+      "birthYear": 1722,
+      "deathYear": 1798,
+      "era": "classical",
+      "bio": {
+        "ur": "وارث شاہ پنجابی کے عظیم صوفی شاعر تھے۔ ہیر رانجھا ان کی مشہور تصنیف ہے۔"
+      }
+    },
+    {
+      "id": "hafiz",
+      "name": { "en": "Hafiz Shirazi", "ur": "حافظ شیرازی", "fa": "حافظ شیرازی" },
+      "birthYear": 1315,
+      "deathYear": 1390,
+      "era": "classical",
+      "bio": {
+        "fa": "خواجه شمس‌الدین محمد حافظ شیرازی، شاعر بزرگ ایرانی",
+        "ur": "حافظ شیرازی فارسی کے عظیم ترین غزل گو شاعر تھے۔"
+      }
+    },
+    {
+      "id": "mutanabbi",
+      "name": { "en": "Al-Mutanabbi", "ar": "أبو الطيب المتنبي", "ur": "المتنبی" },
+      "birthYear": 915,
+      "deathYear": 965,
+      "era": "classical",
+      "bio": {
+        "ar": "أبو الطيب أحمد بن الحسين المتنبي، أعظم شعراء العرب",
+        "ur": "المتنبی عربی کے عظیم ترین شاعروں میں شمار ہوتے ہیں۔"
+      }
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "version": "1.0.0",
+  "banners": [
+    {
+      "id": "welcome",
+      "imageUrl": "banners/welcome.jfif",
+      "action": "none",
+      "targetId": ""
+    }
+  ],
+  "notices": [
+    {
+      "id": "welcome-notice",
+      "message": {
+        "ur": "کتاب میں خوش آمدید! پڑھنے کا لطف اٹھائیں۔",
+        "en": "Welcome to Kitaab! Enjoy reading."
+      },
+      "type": "info",
+      "dismissible": true
+    }
+  ],
+  "featureFlags": {
+    "enableRewards": true,
+    "enableCloudSync": false,
+    "maintenanceMode": false,
+    "enableSearch": true,
+    "enableBookmarks": true,
+    "enableSharing": true,
+    "enableDictionary": false
+  },
+  "adConfig": {
+    "appOpenEnabled": true,
+    "bannerEnabled": true,
+    "interstitialEnabled": true,
+    "rewardedEnabled": true,
+    "interstitialFrequency": 5,
+    "freeDownloads": 2,
+    "minTimeBetweenAppOpen": 14400000
+  }
+}
+
